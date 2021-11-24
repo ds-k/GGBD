@@ -42,7 +42,7 @@
 
 [👾  Wiki]()
 
-[🗓  회의록]()
+[🗓  회의록](https://github.com/daeseongkim05/nearby/projects/2)
 
 [🐬 DB schema]()
 
