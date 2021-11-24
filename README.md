@@ -40,16 +40,16 @@
 
 ## More Info
 
-[👾  Wiki]()
+* [Wiki]()
 
-[🗓  회의록](https://github.com/daeseongkim05/nearby/projects/2)
+* [회의록](https://github.com/daeseongkim05/nearby/projects/2)
 
-[🐬 DB schema]()
+* [DB schema]()
 
-[🐳 API 문서]()
+* [API 문서]()
 
-[✔️ Flowchart]()
+* [Flowchart]()
 
-[📐 Wireframe]()
+* [Wireframe]()
 
-[🎨 UI-Design]()
+* [UI-Design]()
