@@ -20,21 +20,21 @@
 
 ## Team Members
 
-<img src = "https://user-images.githubusercontent.com/85698976/143169476-4b176358-7440-4327-b52b-6b3009c05fd6.jpg" width="200px">
-<a href="https://github.com/devSominPark"><img src = "https://img.shields.io/badge/devSominPark-black?style=for-the-badge&logo=GitHub&logoColor=white"></a>
-
-### 박소민 
-* Role : Team Member
-* Position : Front-End
-* Stack : 
-* Works :
-
 <img src = "https://user-images.githubusercontent.com/85698976/143169456-993f78b0-cb49-4289-82fc-7f143a434b08.jpeg" width="200px">
 <a href="https://github.com/daeseongkim05"><img src = "https://img.shields.io/badge/daeseongkim05-black?style=for-the-badge&logo=GitHub&logoColor=white"></a>
 
 ### 김대성 
 * Role : Team Leader
 * Position : Full-Stack
+* Stack : 
+* Works :
+
+<img src = "https://user-images.githubusercontent.com/85698976/143169476-4b176358-7440-4327-b52b-6b3009c05fd6.jpg" width="200px">
+<a href="https://github.com/devSominPark"><img src = "https://img.shields.io/badge/devSominPark-black?style=for-the-badge&logo=GitHub&logoColor=white"></a>
+
+### 박소민 
+* Role : Team Member
+* Position : Front-End
 * Stack : 
 * Works :
 
