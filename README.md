@@ -10,10 +10,11 @@
 ### 프로젝트 기능
 
 1. 오늘의 감정을 날씨로 선택해 기록할 수 있습니다.
-2. 작성하신 글을 선택적으로 공개/비공개할 수 있고, 댓글 활성화/비활성화를 선택 할 수 있습니다. (개인적인 용도로도 사용 가능합니다.)
+2. 작성하신 글을 선택적으로 공개/비공개할 수 있고, 댓글 활성화/비활성화를 선택 할 수 있어 개인적인 용도로도 사용 가능합니다.
 3. 응원이 필요한 글부터 최신순으로 상단에 위치시킵니다.
 
 ## 사용 스택
+<img width="800" alt="GGBD" src="https://user-images.githubusercontent.com/85698976/143597316-500d513b-1a44-4864-bce9-292ba6807870.png">
 
 ## Team Members
 
@@ -24,7 +25,7 @@
 
 - Role : Team Leader
 - Position : Full-Stack
-- Stack :
+- Stack : `React`, `React-Hooks`, `Next.js`, `TypeScript`, `Emotion`, `Redux-Toolkit`, `JavaScript`, `node.js`, `Sequelize`, `mysql`
 - Works :
 
 <img src = "https://user-images.githubusercontent.com/85698976/143169476-4b176358-7440-4327-b52b-6b3009c05fd6.jpg" width="200px">
@@ -34,7 +35,7 @@
 
 - Role : Team Member
 - Position : Front-End
-- Stack :
+- Stack : `React`, `React-Hooks`, `Next.js`, `TypeScript`, `Emotion`, `Redux-Toolkit`
 - Works :
 
 ## More Info
