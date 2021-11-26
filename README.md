@@ -1,5 +1,7 @@
 ## 공감병동 소개
 
+![공감병동 로고](https://user-images.githubusercontent.com/85698976/143592312-a22abb15-ded8-41d4-a214-5cdcf1e5a760.png)
+
 오랜 투병 생활에 몸도 마음도 지친 분들이 매우 많습니다. </br>
 더이상 혼자 속으로만 삭히지 말고 하루하루의 감정과 생각을 자유롭게 기록해보세요. </br>
 글을 적는 것만으로 많은 위로가 될 수 있다고 믿습니다. </br>
@@ -37,7 +39,7 @@
 
 ## More Info
 
-- [Wiki]()
+- [Wiki](https://github.com/daeseongkim05/GGBD/wiki)
 
 - [회의록](https://github.com/daeseongkim05/nearby/projects/2)
 
@@ -45,7 +47,7 @@
 
 - [API 문서]()
 
-- [Flowchart]()
+- [Flowchart](https://github.com/daeseongkim05/GGBD/wiki/Flow-Chart)
 
 - [Wireframe]()
 
