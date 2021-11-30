@@ -10,21 +10,22 @@ module.exports = {
       main: ["Gowun Batang", "serif"],
       sub: ["Noto Sans KR", "sans-serif"],
     },
-    colors: {
-      transparent: "transparent",
-      current: "currentColor",
-      blue: {
-        main: "#0984C0",
-      },
-      black: {
-        main: "#2c2c2b",
-      },
-      gray: {
-        main: "#565759",
-        sub: "#AAA7B0",
+    extend: {
+      colors: {
+        transparent: "transparent",
+        current: "currentColor",
+        blue: {
+          main: "#0984C0",
+        },
+        black: {
+          main: "#2c2c2b",
+        },
+        gray: {
+          main: "#565759",
+          sub: "#AAA7B0",
+        },
       },
     },
-    extend: {},
   },
   variants: {
     extend: {},
