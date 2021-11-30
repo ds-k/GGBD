@@ -4,7 +4,7 @@ const Profile = () => {
   return (
     <>
       <HeadInfo title={"Profile"} content={""} />
-      <div>Profile</div>
+      <div className="font-main font-bold text-7xl">profile text test</div>
     </>
   );
 };

@@ -1,17 +1,11 @@
 import type { NextPage } from "next";
-import Head from "next/head";
 
 const Home: NextPage = () => {
   return (
     <div>
-      <Head>
-        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
-      <div className="font-main font-bold text-9xl">Home</div>
+      <div className="font-main font-bold lg:text-9xl md:text-5xl text-lg md:text-blue-main lg:text-red-300">
+        샘플입니당
+      </div>
     </div>
   );
 };
