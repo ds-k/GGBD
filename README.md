@@ -10,11 +10,11 @@
 ### 프로젝트 기능
 
 1. 오늘의 감정을 날씨로 선택해 기록할 수 있습니다.
-2. 작성하신 글을 선택적으로 공개/비공개할 수 있고, 댓글 활성화/비활성화를 선택 할 수 있어 개인적인 용도로도 사용 가능합니다.
-3. 응원이 필요한 글부터 최신순으로 상단에 위치시킵니다.
+2. 작성하신 글을 선택적으로 공개/비공개할 수 있어 개인적인 용도로도 사용 가능합니다.
+3. 댓글 활성화/비활성화를 선택할 수 있습니다.
+6. 응원이 필요한 글을 기준으로 정렬할 수 있습니다.
 
 ## 사용 스택
-<img width="800" alt="GGBD" src="https://user-images.githubusercontent.com/85698976/143597316-500d513b-1a44-4864-bce9-292ba6807870.png">
 
 ## Team Members
 
@@ -25,7 +25,7 @@
 
 - Role : Team Leader
 - Position : Full-Stack
-- Stack : `React`, `React-Hooks`, `Next.js`, `TypeScript`, `Emotion`, `Redux-Toolkit`, `JavaScript`, `node.js`, `Sequelize`, `mysql`
+- Stack :
 - Works :
 
 <img src = "https://user-images.githubusercontent.com/85698976/143169476-4b176358-7440-4327-b52b-6b3009c05fd6.jpg" width="200px">
@@ -35,21 +35,21 @@
 
 - Role : Team Member
 - Position : Front-End
-- Stack : `React`, `React-Hooks`, `Next.js`, `TypeScript`, `Emotion`, `Redux-Toolkit`
+- Stack :
 - Works :
 
 ## More Info
 
 - [Wiki](https://github.com/daeseongkim05/GGBD/wiki)
 
-- [회의록](https://github.com/daeseongkim05/nearby/projects/2)
+- [회의록](https://github.com/daeseongkim05/GGBD/projects/2)
 
-- [DB schema]()
+- [DB schema](https://github.com/daeseongkim05/GGBD/wiki/DB-Schema)
 
 - [API 문서]()
 
 - [Flowchart](https://github.com/daeseongkim05/GGBD/wiki/Flow-Chart)
 
-- [Wireframe]()
+- [Wireframe](https://github.com/daeseongkim05/GGBD/wiki/Wireframe)
 
 - [UI-Design]()
