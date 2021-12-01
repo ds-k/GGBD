@@ -5,7 +5,7 @@ interface IProps {
 const MainBtn = ({ context }: IProps) => {
   return (
     <div>
-      <button className="flex justify-center items-center w-20 h-8 bg-blue-main rounded-full font-sub text-white">
+      <button className="flex justify-center items-center w-20 h-8 bg-blue-main rounded-full font-sub text-white text-sm">
         {context}
       </button>
     </div>
