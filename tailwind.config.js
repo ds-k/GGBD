@@ -3,7 +3,7 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     screens: {
-      md: "510px",
+      md: "700px",
       lg: "1100px",
     },
     fontFamily: {
@@ -11,6 +11,11 @@ module.exports = {
       sub: ["Noto Sans KR", "sans-serif"],
     },
     extend: {
+      width: {
+        sm: "320px",
+        md: "700px",
+        lg: "1032px",
+      },
       colors: {
         transparent: "transparent",
         current: "currentColor",
