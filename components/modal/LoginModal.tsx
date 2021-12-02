@@ -7,7 +7,6 @@ interface IProps {
 }
 
 const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen }: IProps) => {
-  console.log(isLoginModalOpen, setIsLoginModalOpen);
   return (
     <main
       className={

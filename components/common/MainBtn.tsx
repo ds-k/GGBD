@@ -1,6 +1,6 @@
 interface IProps {
   context: string;
-  handleClick: () => void;
+  handleClick?: () => void;
 }
 
 const MainBtn = ({ context, handleClick }: IProps) => {
