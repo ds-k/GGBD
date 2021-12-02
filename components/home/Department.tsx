@@ -38,7 +38,7 @@ const Department = ({ departments }: IProps) => {
                 <div key={el.id}>
                   <Link href="/department/[name]" as={`/department/${el.name}`}>
                     <a>
-                      <div className="flex justify-center items-center lg:w-40 md:w-44 lg:h-16 md:h-16 h-12 border text-gray-main hover:text-blue-main border-gray-sub hover:border-blue-main cursor-pointer">
+                      <div className="flex justify-center items-center lg:h-16 md:h-16 h-12 border text-gray-main hover:text-blue-main border-gray-sub hover:border-blue-main cursor-pointer">
                         <div className="font-sub font-normal lg:text-sm md:text-sm text-xs">
                           {el.name}
                         </div>
@@ -51,13 +51,11 @@ const Department = ({ departments }: IProps) => {
           : null}
       </div>
       <div className="flex justify-center w-auto mt-4">
-        <div onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? (
-            <MainBtn context={"닫기"} />
-          ) : (
-            <MainBtn context={"더보기"} />
-          )}
-        </div>
+        {isOpen ? (
+          <MainBtn context={"닫기"} handleClick={() => setIsOpen(!isOpen)} />
+        ) : (
+          <MainBtn context={"더보기"} handleClick={() => setIsOpen(!isOpen)} />
+        )}
       </div>
     </div>
   );
