@@ -3,9 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import Drawer from "./Drawer";
 import MainBtn from "../common/MainBtn";
+import LoginModal from "../modal/LoginModal";
 
 const Nav = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   return (
     <nav className="h-14 flex  w-full px-6 justify-between border-b border-gray-sub">
@@ -15,7 +17,7 @@ const Nav = () => {
           alt="intro"
           width={24}
           height={18}
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => setIsDrawerOpen(!isDrawerOpen)}
           className="cursor-pointer"
         />
         <Link href="/">
@@ -50,9 +52,21 @@ const Nav = () => {
             />
           </a>
         </Link>
-        <MainBtn context={"시작하기"} />
+        <MainBtn
+          context={"시작하기"}
+          handleClick={() => setIsLoginModalOpen(!isLoginModalOpen)}
+        />
       </div>
-      <Drawer isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Drawer
+        isDrawerOpen={isDrawerOpen}
+        setIsDrawerOpen={setIsDrawerOpen}
+        isLoginModalOpen={isLoginModalOpen}
+        setIsLoginModalOpen={setIsLoginModalOpen}
+      />
+      <LoginModal
+        isLoginModalOpen={isLoginModalOpen}
+        setIsLoginModalOpen={setIsLoginModalOpen}
+      />
     </nav>
   );
 };
