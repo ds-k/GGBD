@@ -1,9 +1,13 @@
-import type { NextPage } from "next";
 import Intro from "../components/home/Intro";
 import SectionTitle from "../components/home/SectionTitle";
 import Department from "../components/home/Department";
+import axios from "axios";
 
-const Home: NextPage = () => {
+interface IProps {
+  departments: [{ id: number; name: string }];
+}
+
+const Home = ({ departments }: IProps) => {
   return (
     <div className="flex justify-center p-8">
       <div className="lg:w-lg md:w-md w-sm">
@@ -23,10 +27,22 @@ const Home: NextPage = () => {
           firstSubTitle={"진료과별로 이야기를 나눌 수 있습니다."}
           secondSubTitle={"알고계신 정보를 공유해 보세요."}
         />
-        <Department />
+        <Department departments={departments} />
       </div>
     </div>
   );
 };
 
 export default Home;
+
+export async function getStaticProps() {
+  const getData = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}/department`
+  );
+  const data = getData.data;
+  return {
+    props: {
+      departments: data,
+    },
+  };
+}
