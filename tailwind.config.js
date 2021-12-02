@@ -9,6 +9,7 @@ module.exports = {
     fontFamily: {
       main: ["Gowun Batang", "serif"],
       sub: ["Noto Sans KR", "sans-serif"],
+      google: ["Roboto", "sans-serif"],
     },
     extend: {
       width: {
@@ -28,6 +29,13 @@ module.exports = {
         gray: {
           main: "#565759",
           sub: "#AAA7B0",
+        },
+        kakao: {
+          container: "#FEE500",
+          label: "#000000",
+        },
+        google: {
+          label: "#757575",
         },
       },
     },
