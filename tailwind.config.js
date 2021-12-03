@@ -22,6 +22,7 @@ module.exports = {
         current: "currentColor",
         blue: {
           main: "#0984C0",
+          sub: "#60BDD1",
         },
         black: {
           main: "#2c2c2b",
@@ -43,6 +44,9 @@ module.exports = {
   variants: {
     extend: {
       fontWeight: ["hover"],
+      textColor: ["active"],
+      backgroundColor: ["active"],
+      borderColor: ["active"],
     },
   },
   plugins: [],
