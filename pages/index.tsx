@@ -12,8 +12,8 @@ interface IProps {
 
 const Home = ({ departments }: IProps) => {
   return (
-    <div className="flex justify-center p-8">
-      <div className="lg:w-lg md:w-md w-sm">
+    <div className="flex justify-center lg:p-8 md:p-8 p-4">
+      <div className="lg:w-lg md:w-md w-auto">
         <Intro />
         <SectionTitle
           title={"응원이 필요한 글"}
