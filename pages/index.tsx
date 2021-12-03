@@ -4,6 +4,7 @@ import Department from "../components/home/Department";
 import PostSection from "../components/home/PostSection";
 import axios from "axios";
 import Image from "next/image";
+import BackToTop from "../components/common/BackToTop";
 
 interface IProps {
   departments: [{ id: number; name: string }];
@@ -137,6 +138,9 @@ const Home = ({ departments }: IProps) => {
           secondSubTitle={"알고계신 정보를 공유해 보세요."}
         />
         <Department departments={departments} />
+        <section className="flex justify-end mt-8">
+          <BackToTop />
+        </section>
       </div>
     </div>
   );
