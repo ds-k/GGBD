@@ -17,7 +17,7 @@ const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen }: IProps) => {
       {/* Modal section */}
       <section
         className={
-          "flex flex-col items-center justify-center w-screen max-w-lg mx-auto my-auto rounded-2xl inset-0 absolute bg-white h-1/2  shadow-xl delay-400 duration-500 ease-in-out transition-all transform "
+          "flex flex-col items-center mx-4  justify-center md:w-screen md:max-w-lg md:mx-auto lg:mx-auto my-auto rounded-2xl inset-0 absolute bg-white h-1/2  shadow-xl"
         }
       >
         {/* logo div */}
@@ -33,8 +33,11 @@ const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen }: IProps) => {
         <div className="font-main text-center text-gray-main border-gray-sub border-t border-b py-10 w-5/6 px-4">
           공감병동에 방문해주셔서 감사합니다.
           <br />
-          소셜을 통해 로그인하시면 공감병동의 서비스를 <br />
-          보다 더 다양하게 이용할 수 있습니다. <br />
+          소셜을 통해 로그인하시면 공감병동의 <br className="md:hidden" />
+          서비스를
+          <br className="hidden md:block" /> 보다 더 다양하게 이용할 수
+          있습니다.
+          <br className="hidden md:block" />
           감사합니다.
         </div>
         {/* button div */}
