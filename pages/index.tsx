@@ -12,9 +12,12 @@ interface IProps {
 const Home = ({ departments }: IProps) => {
   return (
     <div className="flex justify-center md:p-8 p-4">
+      {/* Main Container */}
       <div className="lg:w-lg w-screen">
+        {/* Intro Section */}
         <Intro />
         <div className="mt-8">
+          {/* Post Card Section */}
           <Title
             title={"응원이 필요한 글"}
             firstSubTitle={"응원이 필요한 글들을 모았습니다."}
@@ -23,6 +26,7 @@ const Home = ({ departments }: IProps) => {
         </div>
         <PostSection />
         <div className="mt-8">
+          {/* Post Card Section */}
           <Title
             title={"응원을 많이 받은 글"}
             firstSubTitle={"응원을 많이 받은 글들을 모았습니다."}
@@ -30,6 +34,7 @@ const Home = ({ departments }: IProps) => {
           />
         </div>
         <div className="mt-8">
+          {/* Department Section */}
           <Title
             title={"진료과별 이야기"}
             firstSubTitle={"진료과별로 정보를 공유할 수 있습니다."}

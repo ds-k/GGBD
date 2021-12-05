@@ -1,9 +1,10 @@
 import Image from "next/image";
+
 const Intro = () => {
   return (
     <>
       {/*Intro Section*/}
-      <section className="flex lg:justify-end md:justify-end justify-center">
+      <section className="flex md:justify-end justify-center">
         {/* Context */}
         <header className="flex flex-col items-center lg:items-baseline md:items-baseline lg:mt-16 md:mt-8 mt-4 z-10 lg:min-w-full md:min-w-full">
           <div className="font-main font-bold lg:text-4xl md:text-2xl text-lg lg:mb-2">
