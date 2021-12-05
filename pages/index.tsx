@@ -11,8 +11,8 @@ interface IProps {
 
 const Home = ({ departments }: IProps) => {
   return (
-    <div className="flex justify-center lg:p-8 md:p-8 p-4">
-      <div className="lg:w-lg md:w-md w-auto">
+    <div className="flex justify-center md:p-8 p-4">
+      <div className="lg:w-lg w-screen">
         <Intro />
         <div className="mt-8">
           <Title
