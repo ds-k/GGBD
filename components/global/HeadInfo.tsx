@@ -17,7 +17,7 @@ const HeadInfo = ({ title, content }: IProps) => {
 };
 
 HeadInfo.defaultProps = {
-  title: "(개발중)공감병동",
+  title: process.env.NEXT_PUBLIC_TITLE,
   content:
     "슬픔을 나누는 병동, 공감병동입니다. 하루하루의 감정과 생각을 자유롭게 기록해보세요. 많은 사람들이 응원해 줄거에요.",
 };
