@@ -4,10 +4,13 @@ import Link from "next/link";
 import Drawer from "./Drawer";
 import MainBtn from "../common/MainBtn";
 import LoginModal from "../modal/LoginModal";
+import SubBtn from "../common/SubBtn";
 
 const Nav = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [isLogin, setIsLogin] = useState(false);
 
   return (
     <nav className="h-14 flex  w-full px-6 justify-between border-b border-gray-sub">
@@ -52,16 +55,25 @@ const Nav = () => {
             />
           </a>
         </Link>
-        <MainBtn
-          context={"시작하기"}
-          handleClick={() => setIsLoginModalOpen(!isLoginModalOpen)}
-        />
+        {!isLogin ? (
+          <MainBtn
+            context={"시작하기"}
+            handleClick={() => setIsLoginModalOpen(!isLoginModalOpen)}
+          />
+        ) : (
+          <Link href="/post/create">
+            <a>
+              <SubBtn context={"글쓰기"} />
+            </a>
+          </Link>
+        )}
       </div>
       <Drawer
         isDrawerOpen={isDrawerOpen}
         setIsDrawerOpen={setIsDrawerOpen}
         isLoginModalOpen={isLoginModalOpen}
         setIsLoginModalOpen={setIsLoginModalOpen}
+        isLogin={isLogin}
       />
       <LoginModal
         isLoginModalOpen={isLoginModalOpen}

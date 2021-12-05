@@ -2,12 +2,14 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import MainBtn from "../../components/common/MainBtn";
+import SubBtn from "../common/SubBtn";
 
 interface IProps {
   isDrawerOpen: boolean;
   setIsDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isLoginModalOpen: boolean;
   setIsLoginModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isLogin: boolean;
 }
 
 const Drawer = ({
@@ -15,6 +17,7 @@ const Drawer = ({
   setIsDrawerOpen,
   isLoginModalOpen,
   setIsLoginModalOpen,
+  isLogin,
 }: IProps) => {
   return (
     <main
@@ -48,10 +51,18 @@ const Drawer = ({
             로그인 해 주세요.
           </div>
           <div>
-            <MainBtn
-              context={"시작하기"}
-              handleClick={() => setIsLoginModalOpen(!isLoginModalOpen)}
-            ></MainBtn>
+            {!isLogin ? (
+              <MainBtn
+                context={"시작하기"}
+                handleClick={() => setIsLoginModalOpen(!isLoginModalOpen)}
+              />
+            ) : (
+              <Link href="/post/create">
+                <a onClick={() => setIsDrawerOpen(false)}>
+                  <SubBtn context={"글쓰기"} />
+                </a>
+              </Link>
+            )}
           </div>
         </section>
         <section className="flex flex-col items-center gap-y-6">
