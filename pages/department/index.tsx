@@ -20,7 +20,7 @@ const Departments = ({ departments }: IProps) => {
         content={"진료과별로 정보를 공유할 수 있습니다."}
       />
       <div className="flex justify-center md:p-8 p-4">
-        <div className="lg:w-lg md:w-md w-screen">
+        <div className="lg:w-lg w-screen">
           <Title
             title={"진료과별 이야기"}
             firstSubTitle={"진료과별로 정보를 공유할 수 있습니다."}
