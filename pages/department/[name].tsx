@@ -7,8 +7,8 @@ const Department = ({ department }: any) => {
   return (
     <>
       <HeadInfo
-        title={"진료과별 이야기"}
-        content={"진료과별 이야기를 함께 나눠 보세요."}
+        title={`${name}의 이야기`}
+        content={`${name}에 대해 알고계신 정보를 공유해 주세요.`}
       />
       <div>Department : {name}</div>
       <div>{description}</div>
