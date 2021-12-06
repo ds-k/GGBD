@@ -38,6 +38,13 @@ module.exports = {
         google: {
           label: "#757575",
         },
+        toggle: {
+          pink: "#F28F8F",
+          yellow: "#FCE44D",
+        },
+      },
+      dropShadow: {
+        base: "0px 0px 4px rgba(0, 0, 0, 0.2)",
       },
     },
   },
