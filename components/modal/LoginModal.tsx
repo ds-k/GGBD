@@ -2,8 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import queryString from "query-string";
-import axios from "axios";
+import { getSocialAccessToken, googleURL, kakaoURL } from "../common/Auth";
 
 interface IProps {
   isLoginModalOpen: boolean;
@@ -13,41 +12,15 @@ interface IProps {
 const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen }: IProps) => {
   const router = useRouter();
   const code = router.query.code as string;
+  const state = router.query.state as string;
 
   useEffect(() => {
-    const getKakaoAccessToken = async (code: string) => {
-      const formData = {
-        grant_type: "authorization_code",
-        client_id: process.env.NEXT_PUBLIC_KAKAO_REST_API,
-        redirect_uri: `${process.env.NEXT_PUBLIC_API_URL}/oauth/kakao`,
-        code,
-      };
-      const tokenData = await axios.post(
-        `https://kauth.kakao.com/oauth/token?${queryString.stringify(formData)}`
-      );
-      return tokenData;
-    };
-    const getSocialAccessToken = async (code: string) => {
-      try {
-        const tokenData = await getKakaoAccessToken(code);
-        const userInfo = await axios.post(
-          `${process.env.NEXT_PUBLIC_API_URL}/oauth/kakao/login`,
-          {
-            tokenData,
-          }
-        );
-        console.log(userInfo);
-        router.push("/");
-      } catch (e) {
-        console.log(e);
-      }
-    };
     if (code) {
-      getSocialAccessToken(code);
+      getSocialAccessToken(code, state);
+      router.push("/");
     }
-  }, [code]);
+  }, [code, router, state]);
 
-  const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API}&redirect_uri=${process.env.NEXT_PUBLIC_API_URL}/oauth/kakao&&response_type=code`;
   return (
     <main
       className={
@@ -83,7 +56,10 @@ const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen }: IProps) => {
         </div>
         {/* button div */}
         <div className="flex flex-col items-center w-5/6 gap-y-6 mt-8">
-          <button className="flex items-center justify-center w-full h-14 bg-white rounded-xl shadow-lg">
+          <a
+            href={googleURL}
+            className="flex items-center justify-center w-full h-14 bg-white rounded-xl shadow-lg"
+          >
             <Image
               src="/images/auth/google.svg"
               alt="google_logo"
@@ -93,7 +69,7 @@ const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen }: IProps) => {
             <span className="font-google text-google-label text-lg ml-2">
               Google 계정으로 로그인
             </span>
-          </button>
+          </a>
           <a
             href={kakaoURL}
             className="flex items-center justify-center w-full h-14 bg-kakao-container rounded-xl shadow-lg cursor-pointer"
