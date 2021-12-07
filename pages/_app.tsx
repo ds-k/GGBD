@@ -1,4 +1,5 @@
 import "tailwindcss/tailwind.css";
+import "/quill.custom.css";
 import type { AppProps } from "next/app";
 import Layout from "../components/global/Layout";
 
