@@ -40,6 +40,18 @@ const Create = () => {
     ],
   };
 
+  const formats = [
+    "header",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "blockquote",
+    "list",
+    "indent",
+    "link",
+  ];
+
   return (
     <>
       {/* headInfo */}
@@ -151,6 +163,7 @@ const Create = () => {
               theme="bubble"
               placeholder="남기고 싶은 기록을 자유롭게 적어주세요."
               modules={modules}
+              formats={formats}
               value={value}
               onChange={setValue}
             />
