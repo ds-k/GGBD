@@ -28,16 +28,17 @@ const getGoogleAccessToken = async (code: string) => {
   return tokenData;
 };
 
-const getSocialAccessToken = async (code: string, state: string) => {
+const socialLogin = async (code: string, state: string) => {
   try {
     const tokenData =
       state === "kakao"
         ? await getKakaoAccessToken(code)
         : await getGoogleAccessToken(code);
     const userInfo = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/oauth/${state}/login`,
+      `${process.env.NEXT_PUBLIC_API_URL}/oauth/login`,
       {
         tokenData,
+        state,
       }
     );
     console.log(userInfo);
@@ -70,4 +71,4 @@ const kakaoURL = `https://kauth.kakao.com/oauth/authorize?${queryString.stringif
   kakaoFormData
 )}`;
 
-export { getSocialAccessToken, googleURL, kakaoURL };
+export { socialLogin, googleURL, kakaoURL };

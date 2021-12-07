@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { getSocialAccessToken, googleURL, kakaoURL } from "../common/Auth";
+import { socialLogin, googleURL, kakaoURL } from "../common/Auth";
 
 interface IProps {
   isLoginModalOpen: boolean;
@@ -16,7 +16,7 @@ const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen }: IProps) => {
 
   useEffect(() => {
     if (code) {
-      getSocialAccessToken(code, state);
+      socialLogin(code, state);
       router.push("/");
     }
   }, [code, router, state]);
