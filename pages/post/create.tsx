@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import HeadInfo from "../../components/global/HeadInfo";
 import WeatherBtn from "../../components/common/WeatherBtn";
@@ -6,12 +7,38 @@ import MainBtn from "../../components/common/MainBtn";
 import SubBtn from "../../components/common/SubBtn";
 import Toggle from "../../components/common/Toggle";
 import ChangePhoto from "../../components/icon/ChangePhoto";
+import dynamic from "next/dynamic";
+const ReactQuill = dynamic(() => import("react-quill"), {
+  ssr: false,
+  loading: () => (
+    <div className="font-main font-nomal md:text-xl text-lg text-gray-sub">
+      남기고 싶은 기록을 자유롭게 적어주세요.
+    </div>
+  ),
+});
 
 const Create = () => {
-  const [isClick, setIsClick] = useState<boolean>(false);
+  const router = useRouter();
+
   const [weather, setWeather] = useState<string>("");
   const [isPublic, setIsPublic] = useState<boolean>(false);
+  const [isClick, setIsClick] = useState<boolean>(false);
   const [isActive, setIsActive] = useState<boolean>(false);
+  const [value, setValue] = useState("");
+
+  const modules = {
+    toolbar: [
+      [{ header: [1, 2, false] }],
+      ["bold", "italic", "underline", "strike", "blockquote"],
+      [
+        { list: "ordered" },
+        { list: "bullet" },
+        { indent: "-1" },
+        { indent: "+1" },
+      ],
+      ["link"],
+    ],
+  };
 
   return (
     <>
@@ -21,8 +48,8 @@ const Create = () => {
         content={"오늘의 감정과 생각을 자유롭게 기록해보세요."}
       />
       {/* CreatePost Page */}
+      {/* Img Container */}
       <section className="flex flex-col justify-center items-center w-screen h-72 bg-gray-100">
-        {/* Img Container */}
         {weather === "" ? (
           <>
             <div className="font-main font-nomal text-2xl text-gray-main">
@@ -65,8 +92,8 @@ const Create = () => {
       {/* Middle Container */}
       <div className="flex justify-center">
         <div className="lg:w-lg w-screen p-4">
+          {/* Choose Departments */}
           <section className="flex md:flex-row flex-col-reverse justify-between md:mb-8 mb-6">
-            {/* Choose Departments */}
             <div className="flex md:mt-5 cursor-pointer">
               <div className="mr-2 font-main font-nomal lg:text-xl text-lg text-gray-main">
                 진료받고 계신 과는 어딘가요?
@@ -115,21 +142,27 @@ const Create = () => {
       </div>
       {/* Line */}
       <div className="w-full border-1/2 border-b border-gray-sub" />
-      {/* Buttom Container */}
-      <div className="flex justify-center">
+      {/* Bottom Container */}
+      <section className="flex justify-center">
         <div className="lg:w-lg w-screen p-4">
           {/* Quil Editor */}
-          <div className="h-64 mt-4 font-main font-nomal md:text-xl text-lg text-gray-sub">
-            남기고 싶은 기록을 자유롭게 적어주세요.
+          <div className="mt-4">
+            <ReactQuill
+              theme="bubble"
+              placeholder="남기고 싶은 기록을 자유롭게 적어주세요."
+              modules={modules}
+              value={value}
+              onChange={setValue}
+            />
           </div>
           <div className="flex justify-center">
-            <div className="my-8 grid grid-cols-2 gap-2">
+            <div className="my-12 grid grid-cols-2 gap-2">
               <MainBtn context={"등록"} />
-              <SubBtn context={"취소"} />
+              <SubBtn context={"취소"} handleClick={() => router.back()} />
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 };
