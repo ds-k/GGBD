@@ -1,5 +1,9 @@
 import React from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import queryString from "query-string";
+import axios from "axios";
 
 interface IProps {
   isLoginModalOpen: boolean;
@@ -7,6 +11,43 @@ interface IProps {
 }
 
 const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen }: IProps) => {
+  const router = useRouter();
+  const code = router.query.code as string;
+
+  useEffect(() => {
+    const getKakaoAccessToken = async (code: string) => {
+      const formData = {
+        grant_type: "authorization_code",
+        client_id: process.env.NEXT_PUBLIC_KAKAO_REST_API,
+        redirect_uri: `${process.env.NEXT_PUBLIC_API_URL}/oauth/kakao`,
+        code,
+      };
+      const tokenData = await axios.post(
+        `https://kauth.kakao.com/oauth/token?${queryString.stringify(formData)}`
+      );
+      return tokenData;
+    };
+    const getSocialAccessToken = async (code: string) => {
+      try {
+        const tokenData = await getKakaoAccessToken(code);
+        const userInfo = await axios.post(
+          `${process.env.NEXT_PUBLIC_API_URL}/oauth/kakao/login`,
+          {
+            tokenData,
+          }
+        );
+        console.log(userInfo);
+        router.push("/");
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    if (code) {
+      getSocialAccessToken(code);
+    }
+  }, [code]);
+
+  const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API}&redirect_uri=${process.env.NEXT_PUBLIC_API_URL}/oauth/kakao&&response_type=code`;
   return (
     <main
       className={
@@ -53,7 +94,10 @@ const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen }: IProps) => {
               Google 계정으로 로그인
             </span>
           </button>
-          <button className="flex items-center justify-center w-full h-14 bg-kakao-container rounded-xl shadow-lg">
+          <a
+            href={kakaoURL}
+            className="flex items-center justify-center w-full h-14 bg-kakao-container rounded-xl shadow-lg cursor-pointer"
+          >
             <Image
               src="/images/auth/kakao.svg"
               alt="kakao_logo"
@@ -63,7 +107,7 @@ const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen }: IProps) => {
             <span className="text-kakao-label text-opacity-90 text-lg ml-2">
               카카오 로그인
             </span>
-          </button>
+          </a>
         </div>
       </section>
       {/* background section */}
