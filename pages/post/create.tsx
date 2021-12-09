@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import axios from "axios";
 import Image from "next/image";
 import HeadInfo from "../../components/global/HeadInfo";
 import WeatherBtn from "../../components/common/WeatherBtn";
@@ -17,10 +18,15 @@ const ReactQuill = dynamic(() => import("react-quill"), {
   ),
 });
 
-const Create = () => {
+interface IProps {
+  departments: [{ id: number; name: string }];
+}
+
+const Create = ({ departments }: IProps) => {
   const router = useRouter();
 
   const [weather, setWeather] = useState<string>("");
+  // const [department, setDepartment] = useState<string>("");
   const [isPublic, setIsPublic] = useState<boolean>(false);
   const [isClick, setIsClick] = useState<boolean>(false);
   const [isActive, setIsActive] = useState<boolean>(false);
@@ -107,9 +113,21 @@ const Create = () => {
           {/* Choose Departments */}
           <section className="flex md:flex-row flex-col-reverse justify-between md:mb-8 mb-6">
             <div className="flex md:mt-5 cursor-pointer">
-              <div className="mr-2 font-main font-nomal lg:text-xl text-lg text-gray-main">
-                진료받고 계신 과는 어딘가요?
-              </div>
+              <select
+                className="cursor-pointer appearance-none mr-2 font-main font-nomal lg:text-xl text-lg text-gray-main outline-none "
+                // onChange={(e) => setDepartment(e.target.value)}
+              >
+                <option value="" hidden>
+                  진료받고 계신 과는 어딘가요?
+                </option>
+                {departments.map((department) => {
+                  return (
+                    <option key={department.id} value={department.name}>
+                      {department.name}
+                    </option>
+                  );
+                })}
+              </select>
               <Image
                 src="/images/common/dropBox_Icon.svg"
                 alt="dropBox_Icon"
@@ -181,3 +199,15 @@ const Create = () => {
 };
 
 export default Create;
+
+export async function getStaticProps() {
+  const getData = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}/department`
+  );
+  const data = getData.data;
+  return {
+    props: {
+      departments: data,
+    },
+  };
+}
