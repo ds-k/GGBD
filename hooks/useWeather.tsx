@@ -3,9 +3,10 @@
 import { useState } from "react";
 import WeatherBtn from "../components/common/WeatherBtn";
 type UseWeathersResult = [string, () => JSX.Element];
+type WeatherCondition = "맑음" | "구름" | "비" | "전체";
 
 export const useWeather = (
-  labels: string[] = ["맑음", "구름", "비"]
+  labels: WeatherCondition[] = ["맑음", "구름", "비"]
 ): UseWeathersResult => {
   const [weather, setWeather] = useState<string>("");
 
