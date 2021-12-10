@@ -3,12 +3,13 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import Image from "next/image";
 import HeadInfo from "../../components/global/HeadInfo";
-import WeatherBtn from "../../components/common/WeatherBtn";
+// import WeatherBtn from "../../components/common/WeatherBtn";
 import MainBtn from "../../components/common/MainBtn";
 import SubBtn from "../../components/common/SubBtn";
 import Toggle from "../../components/common/Toggle";
 import ChangePhoto from "../../components/icon/ChangePhoto";
 import dynamic from "next/dynamic";
+import { useWeather } from "../../hooks/useWeather";
 const ReactQuill = dynamic(() => import("react-quill"), {
   ssr: false,
   loading: () => (
@@ -25,7 +26,7 @@ interface IProps {
 const Create = ({ departments }: IProps) => {
   const router = useRouter();
 
-  const [weather, setWeather] = useState<string>("");
+  const [weather, renderWeathers] = useWeather();
   // const [department, setDepartment] = useState<string>("");
   const [isPublic, setIsPublic] = useState<boolean>(false);
   const [isClick, setIsClick] = useState<boolean>(false);
@@ -87,25 +88,7 @@ const Create = ({ departments }: IProps) => {
           </div>
         )}
         {/* 날씨 선택 */}
-        <div className="w-screen flex justify-center">
-          <div className="grid grid-cols-3 gap-2">
-            <WeatherBtn
-              context={"맑음"}
-              weather={weather}
-              handleClick={() => setWeather("맑음")}
-            />
-            <WeatherBtn
-              context={"구름"}
-              weather={weather}
-              handleClick={() => setWeather("구름")}
-            />
-            <WeatherBtn
-              context={"비"}
-              weather={weather}
-              handleClick={() => setWeather("비")}
-            />
-          </div>
-        </div>
+        <div className="w-screen flex justify-center">{renderWeathers()}</div>
       </section>
       {/* Middle Container */}
       <div className="flex justify-center">
