@@ -1,7 +1,11 @@
 import axios from "axios";
 import HeadInfo from "../../components/global/HeadInfo";
 
-const Department = ({ department }: any) => {
+interface IDepartment {
+  department: { name: string; description: string };
+}
+
+const Department = ({ department }: IDepartment) => {
   const { name, description } = department;
 
   return (
