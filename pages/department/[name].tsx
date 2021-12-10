@@ -10,12 +10,24 @@ const Department = ({ department }: IDepartment) => {
 
   return (
     <>
+      {/* headInfo */}
       <HeadInfo
         title={`${name}의 이야기`}
         content={`${name}에 대해 알고계신 정보를 공유해 주세요.`}
       />
-      <div>Department : {name}</div>
-      <div>{description}</div>
+      {/* Department Page */}
+      <div className="flex justify-center md:p-8 p-4 h-screen">
+        <div className="lg:w-lg w-screen">
+          <section className="mt-4">
+            <header className="font-main font-bold lg:text-3xl md:text-2xl text-xl lg:mb-2 text-black-main">
+              {name}
+            </header>
+            <hgroup className="font-main font-nomal lg:text-xl md:text-lg text-base text-gray-sub">
+              <span>{description}</span>
+            </hgroup>
+          </section>
+        </div>
+      </div>
     </>
   );
 };
