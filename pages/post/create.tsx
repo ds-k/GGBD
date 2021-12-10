@@ -1,63 +1,32 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { useWeather } from "../../hooks/useWeather";
+import { useDropbox } from "../../hooks/useDropbox";
 import axios from "axios";
-import Image from "next/image";
 import HeadInfo from "../../components/global/HeadInfo";
-// import WeatherBtn from "../../components/common/WeatherBtn";
 import MainBtn from "../../components/common/MainBtn";
 import SubBtn from "../../components/common/SubBtn";
 import Toggle from "../../components/common/Toggle";
 import ChangePhoto from "../../components/icon/ChangePhoto";
-import dynamic from "next/dynamic";
-import { useWeather } from "../../hooks/useWeather";
-const ReactQuill = dynamic(() => import("react-quill"), {
-  ssr: false,
-  loading: () => (
-    <div className="font-main font-nomal md:text-xl text-lg text-gray-sub">
-      남기고 싶은 기록을 자유롭게 적어주세요.
-    </div>
-  ),
-});
+import {
+  ReactQuill,
+  modules,
+  formats,
+} from "../../components/post/QuillEditor";
 
-interface IProps {
+interface DropboxCondition {
   departments: [{ id: number; name: string }];
 }
 
-const Create = ({ departments }: IProps) => {
+const Create = (departments: DropboxCondition) => {
   const router = useRouter();
 
   const [weather, renderWeathers] = useWeather();
-  // const [department, setDepartment] = useState<string>("");
+  const { renderDropbox } = useDropbox(departments);
   const [isPublic, setIsPublic] = useState<boolean>(false);
-  const [isClick, setIsClick] = useState<boolean>(false);
+  const [isChange, setIsChange] = useState<boolean>(false);
   const [isActive, setIsActive] = useState<boolean>(false);
   const [value, setValue] = useState("");
-
-  const modules = {
-    toolbar: [
-      [{ header: [1, 2, false] }],
-      ["bold", "italic", "underline", "strike", "blockquote"],
-      [
-        { list: "ordered" },
-        { list: "bullet" },
-        { indent: "-1" },
-        { indent: "+1" },
-      ],
-      ["link"],
-    ],
-  };
-
-  const formats = [
-    "header",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "list",
-    "indent",
-    "link",
-  ];
 
   return (
     <>
@@ -81,10 +50,10 @@ const Create = ({ departments }: IProps) => {
         ) : (
           <div
             className="mb-8"
-            onMouseDown={() => setIsClick(true)}
-            onMouseUp={() => setIsClick(false)}
+            onMouseDown={() => setIsChange(true)}
+            onMouseUp={() => setIsChange(false)}
           >
-            <ChangePhoto color={isClick ? "#0984C0" : "#AAA7B0"} />
+            <ChangePhoto color={isChange ? "#0984C0" : "#AAA7B0"} />
           </div>
         )}
         {/* 날씨 선택 */}
@@ -96,27 +65,7 @@ const Create = ({ departments }: IProps) => {
           {/* Choose Departments */}
           <section className="flex md:flex-row flex-col-reverse justify-between md:mb-8 mb-6">
             <div className="flex md:mt-5 cursor-pointer">
-              <select
-                className="cursor-pointer appearance-none mr-2 font-main font-nomal lg:text-xl text-lg text-gray-main outline-none "
-                // onChange={(e) => setDepartment(e.target.value)}
-              >
-                <option value="" hidden>
-                  진료받고 계신 과는 어딘가요?
-                </option>
-                {departments.map((department) => {
-                  return (
-                    <option key={department.id} value={department.name}>
-                      {department.name}
-                    </option>
-                  );
-                })}
-              </select>
-              <Image
-                src="/images/common/dropBox_Icon.svg"
-                alt="dropBox_Icon"
-                width={20}
-                height={20}
-              />
+              {renderDropbox("select")}
             </div>
             {/* Toggle */}
             <div className="flex md:mb-0 mt-4 mb-8 items-center justify-end">
@@ -143,13 +92,13 @@ const Create = ({ departments }: IProps) => {
               maxLength={36}
               className="w-full md:mb-4 mb-2 font-main font-nomal md:text-3xl text-2xl placeholder-gray-sub text-gray-main outline-none"
               placeholder="글의 제목을 입력해 주세요."
-            ></input>
+            />
             <input
               type="text"
               maxLength={54}
               className="w-full mb-4 font-main font-nomal md:text-xl text-lg placeholder-gray-sub text-gray-main outline-none"
               placeholder="글의 내용을 간략하게 설명해 주세요."
-            ></input>
+            />
           </section>
         </div>
       </div>

@@ -12,7 +12,7 @@ const Toggle = ({ isClick, color, handleClick }: IProps) => {
     >
       <div
         className={
-          "absolute z-10 rounded-full w-5 h-5 bg-white filter drop-shadow-base duration-300 transition-all transform" +
+          "absolute z-10 rounded-full w-5 h-5 bg-white filter drop-shadow-base duration-00 transition-all transform" +
           (isClick ? " translate-x-5 " : " translate-x-0 ")
         }
       />
