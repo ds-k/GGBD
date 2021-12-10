@@ -1,7 +1,7 @@
 import axios from "axios";
-import Intro from "../components/home/Intro";
+import IntroSection from "../components/home/IntroSection";
 import Title from "../components/common/Title";
-import Department from "../components/home/Department";
+import DepartmentSection from "../components/home/DepartmentSection";
 import PostSection from "../components/home/PostSection";
 import BackToTop from "../components/common/BackToTop";
 
@@ -15,7 +15,7 @@ const Home = ({ departments }: IProps) => {
       {/* Main Container */}
       <div className="lg:w-lg w-screen">
         {/* Intro Section */}
-        <Intro />
+        <IntroSection />
         <div className="mt-8">
           {/* Post Card Section */}
           <Title
@@ -41,7 +41,7 @@ const Home = ({ departments }: IProps) => {
             secondSubTitle={"여러분도 함께해주세요."}
           />
         </div>
-        <Department departments={departments} />
+        <DepartmentSection departments={departments} />
         <section className="flex justify-end mt-8">
           <BackToTop />
         </section>

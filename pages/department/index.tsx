@@ -12,7 +12,7 @@ interface IProps {
   ];
 }
 
-const Departments = ({ departments }: IProps) => {
+const Department = ({ departments }: IProps) => {
   return (
     <>
       {/* headInfo */}
@@ -52,7 +52,7 @@ const Departments = ({ departments }: IProps) => {
   );
 };
 
-export default Departments;
+export default Department;
 
 export async function getStaticProps() {
   const getData = await axios.get(
