@@ -11,7 +11,7 @@ interface IProps {
   ];
 }
 
-const Department = ({ departments }: IProps) => {
+const DepartmentSection = ({ departments }: IProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
@@ -63,4 +63,4 @@ const Department = ({ departments }: IProps) => {
   );
 };
 
-export default Department;
+export default DepartmentSection;

@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const Intro = () => {
+const IntroSection = () => {
   return (
     <>
       {/*Intro Section*/}
@@ -33,4 +33,4 @@ const Intro = () => {
   );
 };
 
-export default Intro;
+export default IntroSection;

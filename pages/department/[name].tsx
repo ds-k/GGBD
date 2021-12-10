@@ -5,7 +5,7 @@ interface IDepartment {
   department: { name: string; description: string };
 }
 
-const Department = ({ department }: IDepartment) => {
+const DepartmentBoard = ({ department }: IDepartment) => {
   const { name, description } = department;
 
   return (
@@ -15,7 +15,7 @@ const Department = ({ department }: IDepartment) => {
         title={`${name}의 이야기`}
         content={`${name}에 대해 알고계신 정보를 공유해 주세요.`}
       />
-      {/* Department Page */}
+      {/* DepartmentBoard Page */}
       <div className="flex justify-center md:p-8 p-4 h-screen">
         <div className="lg:w-lg w-screen">
           <section className="mt-4">
@@ -32,7 +32,7 @@ const Department = ({ department }: IDepartment) => {
   );
 };
 
-export default Department;
+export default DepartmentBoard;
 
 interface IProps {
   id: number;
