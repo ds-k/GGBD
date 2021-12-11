@@ -41,7 +41,7 @@ const socialLogin = async (code: string, state: string) => {
         state,
       }
     );
-    console.log(userInfo);
+    return userInfo.data;
   } catch (e) {
     console.log(e);
   }
