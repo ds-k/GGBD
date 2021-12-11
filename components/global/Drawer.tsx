@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import MainBtn from "../../components/common/MainBtn";
+import MainBtn from "../common/MainBtn";
 import SubBtn from "../common/SubBtn";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 import { userState, drawerState, loginModalState } from "../../state/atom";
@@ -66,7 +66,7 @@ const Drawer = () => {
                 <a onClick={() => setIsDrawerOpen(!isDrawerOpen)}>
                   <div className="font-sub font-normal text-sm text-gray-main mb-3">
                     {user.description}
-                  </div>{" "}
+                  </div>
                 </a>
               </Link>
             </>
