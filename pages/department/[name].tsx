@@ -18,7 +18,7 @@ const DepartmentBoard = ({ department }: IDepartment) => {
       {/* DepartmentBoard Page */}
       <div className="flex justify-center md:p-8 p-4 h-screen">
         <div className="lg:w-lg w-screen">
-          <section className="mt-4">
+          <section className="lg:mt-8 mt-4">
             <header className="font-main font-bold lg:text-3xl md:text-2xl text-xl lg:mb-2 text-black-main">
               {name}
             </header>

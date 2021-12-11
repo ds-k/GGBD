@@ -21,7 +21,7 @@ const Department = ({ departments }: IProps) => {
         content={"진료과별로 정보를 공유할 수 있습니다."}
       />
       {/* Department Page */}
-      <div className="flex justify-center md:p-8 p-4">
+      <div className="flex justify-center md:p-8 p-4 lg:mb-28">
         <div className="lg:w-lg w-screen">
           {/* Title */}
           <Title
