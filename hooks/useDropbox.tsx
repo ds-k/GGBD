@@ -13,35 +13,23 @@ interface DropboxCondition {
   departments: [{ id: number; name: string }];
 }
 
-type optionCondition = "all" | "select";
+type optionCondition = "selectNone";
 
 export const useDropbox = ({ departments }: DropboxCondition): IUseDropbox => {
   const [department, setDepartment] = useState<string>("");
 
   const renderDropbox = (option?: optionCondition) => {
-    const renderSwitch = () => {
-      switch (option) {
-        case "all":
-          return <option value="모든 글">모든 글</option>;
-        case "select":
-          return (
-            <option value="" hidden>
-              진료받고 계신 과는 어딘가요?
-            </option>
-          );
-        default:
-          return null;
-      }
-    };
-
     return (
       <>
         <select
-          defaultValue={department}
           className="cursor-pointer appearance-none mr-2 font-main font-nomal lg:text-xl text-lg text-gray-main outline-none "
           onChange={(e) => setDepartment(e.target.value)}
         >
-          {renderSwitch()}
+          {option ? (
+            <option value="" hidden>
+              진료받고 계신 과는 어딘가요?
+            </option>
+          ) : null}
           return (
           {departments.map((el) => {
             if (el.name === department) {

@@ -65,7 +65,7 @@ const Create = (departments: DropboxCondition) => {
           {/* Choose Departments */}
           <section className="flex md:flex-row flex-col-reverse justify-between md:mb-8 mb-6">
             <div className="flex md:mt-5 cursor-pointer">
-              {renderDropbox("select")}
+              {renderDropbox("selectNone")}
             </div>
             {/* Toggle */}
             <div className="flex md:mb-0 mt-4 mb-8 items-center justify-end">
