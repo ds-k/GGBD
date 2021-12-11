@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Drawer from "./Drawer";
 import MainBtn from "../common/MainBtn";
 import LoginModal from "../modal/LoginModal";
 import SubBtn from "../common/SubBtn";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { userState, drawerState, loginModalState } from "../../state/atom";
 
 const Nav = () => {
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  // eslint-disable-next-line no-unused-vars
-  const [isLogin, setIsLogin] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useRecoilState(drawerState);
+  const [isLoginModalOpen, setIsLoginModalOpen] =
+    useRecoilState(loginModalState);
+  const { isLogin } = useRecoilValue(userState);
 
   return (
     <nav className="h-14 flex  w-full px-6 justify-between border-b border-gray-sub">
@@ -68,17 +70,8 @@ const Nav = () => {
           </Link>
         )}
       </div>
-      <Drawer
-        isDrawerOpen={isDrawerOpen}
-        setIsDrawerOpen={setIsDrawerOpen}
-        isLoginModalOpen={isLoginModalOpen}
-        setIsLoginModalOpen={setIsLoginModalOpen}
-        isLogin={isLogin}
-      />
-      <LoginModal
-        isLoginModalOpen={isLoginModalOpen}
-        setIsLoginModalOpen={setIsLoginModalOpen}
-      />
+      <Drawer />
+      <LoginModal />
     </nav>
   );
 };

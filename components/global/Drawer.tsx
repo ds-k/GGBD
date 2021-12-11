@@ -3,22 +3,17 @@ import Link from "next/link";
 import Image from "next/image";
 import MainBtn from "../../components/common/MainBtn";
 import SubBtn from "../common/SubBtn";
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
+import { userState, drawerState, loginModalState } from "../../state/atom";
+import { socialLogOut } from "../common/Auth";
 
-interface IProps {
-  isDrawerOpen: boolean;
-  setIsDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  isLoginModalOpen: boolean;
-  setIsLoginModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  isLogin: boolean;
-}
+const Drawer = () => {
+  const user = useRecoilValue(userState);
+  const [isDrawerOpen, setIsDrawerOpen] = useRecoilState(drawerState);
+  const [isLoginModalOpen, setIsLoginModalOpen] =
+    useRecoilState(loginModalState);
+  const clearUserState = useResetRecoilState(userState);
 
-const Drawer = ({
-  isDrawerOpen,
-  setIsDrawerOpen,
-  isLoginModalOpen,
-  setIsLoginModalOpen,
-  isLogin,
-}: IProps) => {
   return (
     <main
       className={
@@ -36,32 +31,80 @@ const Drawer = ({
       >
         <section className="border-t border-b border-gray-sub h-52 mt-14 mx-6 mb-8 flex flex-col items-center justify-center">
           <div className="mt-1">
-            <Image
-              src="/images/global/guest_profile.svg"
-              alt="guest_profile"
-              width={55}
-              height={55}
-              className="cursor-pointer"
-            />
+            {user.isLogin ? (
+              <Link href="/profile">
+                <a onClick={() => setIsDrawerOpen(!isDrawerOpen)}>
+                  <Image
+                    src={user.img}
+                    alt={user.nickname}
+                    width={55}
+                    height={55}
+                    className="cursor-pointer rounded-full"
+                  />
+                </a>
+              </Link>
+            ) : (
+              <Image
+                src="/images/global/guest_profile.svg"
+                alt="guest_profile"
+                width={55}
+                height={55}
+                className="cursor-pointer"
+              />
+            )}
           </div>
-          <div className="font-main font-bold text-blue-main text-xl my-2">
-            비회원님
-          </div>
-          <div className="font-sub font-normal text-sm text-gray-main mb-3">
-            로그인 해 주세요.
-          </div>
+          {user.isLogin ? (
+            <>
+              <Link href="/profile">
+                <a onClick={() => setIsDrawerOpen(!isDrawerOpen)}>
+                  <div className="font-main font-bold text-blue-main text-xl my-2">
+                    {user.nickname}
+                  </div>
+                </a>
+              </Link>
+              <Link href="/profile">
+                <a onClick={() => setIsDrawerOpen(!isDrawerOpen)}>
+                  <div className="font-sub font-normal text-sm text-gray-main mb-3">
+                    {user.description}
+                  </div>{" "}
+                </a>
+              </Link>
+            </>
+          ) : (
+            <>
+              <div className="font-main font-bold text-blue-main text-xl my-2">
+                비회원님
+              </div>
+              <div className="font-sub font-normal text-sm text-gray-main mb-3">
+                로그인 해주세요
+              </div>
+            </>
+          )}
+
           <div>
-            {!isLogin ? (
+            {user.isLogin ? (
+              <div className="flex gap-3">
+                <Link href="/post/create">
+                  <a onClick={() => setIsDrawerOpen(false)}>
+                    <SubBtn context={"글쓰기"} />
+                  </a>
+                </Link>
+                <Link href="/">
+                  <a
+                    onClick={() => {
+                      socialLogOut(user.accessToken);
+                      clearUserState();
+                    }}
+                  >
+                    <MainBtn context={"로그아웃"} />
+                  </a>
+                </Link>
+              </div>
+            ) : (
               <MainBtn
                 context={"시작하기"}
                 handleClick={() => setIsLoginModalOpen(!isLoginModalOpen)}
               />
-            ) : (
-              <Link href="/post/create">
-                <a onClick={() => setIsDrawerOpen(false)}>
-                  <SubBtn context={"글쓰기"} />
-                </a>
-              </Link>
             )}
           </div>
         </section>

@@ -3,25 +3,22 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { socialLogin, googleURL, kakaoURL } from "../common/Auth";
-import { useRecoilState } from "recoil";
-import { userState } from "../../state/user";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { userState, loginModalState } from "../../state/atom";
 
-interface IProps {
-  isLoginModalOpen: boolean;
-  setIsLoginModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen }: IProps) => {
+const LoginModal = () => {
   const router = useRouter();
   const code = router.query.code as string;
   const state = router.query.state as string;
-  const [user, setUser] = useRecoilState(userState);
-  console.log(user);
+  const [isLoginModalOpen, setIsLoginModalOpen] =
+    useRecoilState(loginModalState);
+  const setUser = useSetRecoilState(userState);
+
   useEffect(() => {
     const login = async () => {
       if (code) {
         const userInfo = await socialLogin(code, state);
-        setUser(userInfo);
+        setUser({ ...userInfo, isLogin: true });
         router.push("/");
       }
     };

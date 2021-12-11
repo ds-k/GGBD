@@ -47,6 +47,21 @@ const socialLogin = async (code: string, state: string) => {
   }
 };
 
+const socialLogOut = async (accessToken: string) => {
+  const result = await axios.post(
+    `${process.env.NEXT_PUBLIC_API_URL}/user/logout`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    }
+  );
+  return result.status;
+};
+
 const googleFormData = {
   client_id: process.env.NEXT_PUBLIC_GOOGLE_REST_API,
   redirect_uri: `${process.env.NEXT_PUBLIC_API_URL}/oauth/google`,
@@ -71,4 +86,4 @@ const kakaoURL = `https://kauth.kakao.com/oauth/authorize?${queryString.stringif
   kakaoFormData
 )}`;
 
-export { socialLogin, googleURL, kakaoURL };
+export { socialLogin, googleURL, kakaoURL, socialLogOut };
