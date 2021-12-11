@@ -3,6 +3,8 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { socialLogin, googleURL, kakaoURL } from "../common/Auth";
+import { useRecoilState } from "recoil";
+import { userState } from "../../state/user";
 
 interface IProps {
   isLoginModalOpen: boolean;
@@ -13,13 +15,19 @@ const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen }: IProps) => {
   const router = useRouter();
   const code = router.query.code as string;
   const state = router.query.state as string;
-
+  const [user, setUser] = useRecoilState(userState);
+  console.log(user);
   useEffect(() => {
-    if (code) {
-      socialLogin(code, state);
-      router.push("/");
-    }
-  }, [code, router, state]);
+    const login = async () => {
+      if (code) {
+        const userInfo = await socialLogin(code, state);
+        setUser(userInfo);
+        router.push("/");
+      }
+    };
+    login();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [code]);
 
   return (
     <main
