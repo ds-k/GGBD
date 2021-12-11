@@ -43,6 +43,12 @@ module.exports = {
           yellow: "#FCE44D",
         },
       },
+      fill: {
+        blue: {
+          main: "#0984C0",
+          sub: "#60BDD1",
+        },
+      },
       dropShadow: {
         base: "0px 0px 4px rgba(0, 0, 0, 0.2)",
       },
@@ -54,6 +60,7 @@ module.exports = {
       textColor: ["active"],
       backgroundColor: ["active"],
       borderColor: ["active"],
+      fill: ["active"],
     },
   },
   plugins: [],
