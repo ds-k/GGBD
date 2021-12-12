@@ -1,8 +1,13 @@
 import { useState } from "react";
+import Link from "next/link";
 import ListTitle from "../common/ListTitle";
 
-const RegionSection = () => {
-  const [region, setRegion] = useState<string>("전체");
+interface IProps {
+  query: string | string[] | undefined;
+}
+
+const RegionSection = ({ query }: IProps) => {
+  const [region, setRegion] = useState(query);
   const regions = [
     "전체",
     "서울",
@@ -19,26 +24,27 @@ const RegionSection = () => {
   ];
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col lg:mt-0 md:mt-3 mt-4">
       {/* List Title */}
       <section>
         <ListTitle title={"지역"} />
       </section>
       {/* Region List */}
-      <section className="grid lg:grid-cols-2 grid-cols-4 gap-x-8 gap-y-0 my-5 ml-2">
+      <section className="grid lg:grid-cols-2 md:grid-cols-4 grid-cols-3 md:gap-x-8 gap-y-0 lg:mt-2 mt-0 ml-2 lg:mb-40 mb-8">
         {regions.map((el, idx) => {
           return (
-            <div key={idx}>
-              <div
-                className={
-                  "cursor-pointer my-1 font-sub font-normal lg:text-lg text-base hover:text-blue-main active:text-blue-main " +
-                  (el === region ? "text-blue-main" : "text-gray-sub")
-                }
-                onClick={() => setRegion(el)}
-              >
-                {el}
-              </div>
-            </div>
+            <Link key={idx} href={`/hospital/${el.replace(" ", "-")}`}>
+              <a onClick={() => setRegion(el)}>
+                <div
+                  className={
+                    "cursor-pointer my-1 font-sub font-normal lg:text-lg md:text-base lg:sm hover:text-blue-main active:text-blue-main " +
+                    (el === region ? "text-blue-main" : "text-gray-sub")
+                  }
+                >
+                  {el}
+                </div>
+              </a>
+            </Link>
           );
         })}
       </section>

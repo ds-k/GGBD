@@ -1,4 +1,6 @@
+import Link from "next/link";
 import axios from "axios";
+import Image from "next/image";
 import HeadInfo from "../../components/global/HeadInfo";
 
 interface IDepartment {
@@ -19,10 +21,23 @@ const DepartmentBoard = ({ department }: IDepartment) => {
       <div className="flex justify-center md:p-8 p-4 h-screen">
         <div className="lg:w-lg w-screen">
           <section className="lg:mt-8 mt-4">
-            <header className="font-main font-bold lg:text-3xl md:text-2xl text-xl lg:mb-2 text-black-main">
+            <Link href={"/department"}>
+              <a>
+                <button className="flex items-center font-main font-normal text-blue-main active:text-blue-sub mb-4">
+                  <Image
+                    src="/images/common/leftArrow_Icon.svg"
+                    alt="leftArrow_Icon"
+                    width={20}
+                    height={20}
+                  />
+                  <div>다른 진료과 선택</div>
+                </button>
+              </a>
+            </Link>
+            <header className="font-main font-bold lg:text-3xl md:text-2xl text-xl mr-3 text-black-main">
               {name}
             </header>
-            <hgroup className="font-main font-nomal lg:text-xl md:text-lg text-base text-gray-sub">
+            <hgroup className="font-main font-nomal lg:text-xl md:text-lg text-base md:mt-2 mt-1 text-gray-sub">
               <span>{description}</span>
             </hgroup>
           </section>

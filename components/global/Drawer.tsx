@@ -126,7 +126,7 @@ const Drawer = () => {
               진료과별 이야기
             </a>
           </Link>
-          <Link href="/hospital">
+          <Link href="/hospital/전체">
             <a
               onClick={() => setIsDrawerOpen(false)}
               className="text-xl text-gray-main font-main font-normal hover:font-bold hover:text-blue-main"
