@@ -19,7 +19,12 @@ interface IProps {
 
 const HospitalSection = ({ hospitals }: IProps) => {
   return (
-    <div className="flex flex-col">
+    <div
+      className={
+        "flex flex-col lg:w-md " +
+        (hospitals.length < 5 ? "lg:mb-0 md:mb-40 mb-80 " : "")
+      }
+    >
       {/* List Title */}
       <section>
         <ListTitle title={"상급종합병원 목록"} />
@@ -30,16 +35,16 @@ const HospitalSection = ({ hospitals }: IProps) => {
           return (
             <div
               key={el.id}
-              className="flex justify-between items-center my-8 ml-2"
+              className="flex justify-between items-center lg:mt-5 mt-2 lg:mb-8 mb-6 mx-2 "
             >
               {/* Info Contents */}
               <div>
                 {/* 병원 이름 */}
-                <div className=" font-main font-normal text-black-main text-2xl mb-1">
+                <div className=" font-main font-normal text-black-main md:text-2xl text-xl mb-1">
                   <span>{el.name}</span>
                 </div>
                 {/* 병원 상세 정보 */}
-                <div className="grid grid-cols-2 font-main font-normal text-base">
+                <div className="flex font-main font-normal md:text-base text-sm">
                   <address className="flex items-center mr-4">
                     <a
                       href={`https://map.naver.com/v5/search/${el.address}`}
@@ -51,7 +56,7 @@ const HospitalSection = ({ hospitals }: IProps) => {
                       </span>
                     </a>
                   </address>
-                  <address>
+                  <address className="md:block hidden">
                     <a
                       href={`${el.phone}`}
                       className="flex items-center not-italic"
@@ -67,7 +72,7 @@ const HospitalSection = ({ hospitals }: IProps) => {
               {/* 홈페이지 링크 */}
               <Link href={`${el.homepage}`}>
                 <a>
-                  <div className="cursor-pointer flex justify-center items-center border border-blue-main active:border-blue-sub rounded-full w-12 h-12">
+                  <div className="cursor-pointer flex justify-center items-center border border-blue-main active:border-blue-sub rounded-full md:w-12 md:h-12 w-10 h-10">
                     <HomeIcon color={"#0984C0"} />
                   </div>
                 </a>
