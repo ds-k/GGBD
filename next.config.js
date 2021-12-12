@@ -5,6 +5,7 @@ module.exports = {
       "images.unsplash.com",
       "lh3.googleusercontent.com",
       "k.kakaocdn.net",
+      "placeimg.com",
     ],
   },
   reactStrictMode: true,
