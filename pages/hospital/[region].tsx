@@ -32,7 +32,7 @@ const Hospital = ({ hospitals }: IProps) => {
         title={
           region === "전체"
             ? "상급종합병원"
-            : `${String(region).replace("-", " ")}의 상급종합병원`
+            : `상급종합병원 | ${String(region).replace("-", " ")}`
         }
         content={
           region === "전체"
@@ -44,8 +44,8 @@ const Hospital = ({ hospitals }: IProps) => {
         }
       />
       {/* Hospital Page */}
-      <div className="flex justify-center md:p-8 p-4">
-        <div className="lg:w-lg w-screen">
+      <body className="flex justify-center md:p-8 p-4">
+        <main className="lg:w-lg w-screen">
           {/* Title Section */}
           <Title
             title={"상급종합병원"}
@@ -63,19 +63,19 @@ const Hospital = ({ hospitals }: IProps) => {
             />
           </section>
           {/* contents */}
-          <div className="flex lg:flex-row lg:justify-between flex-col-reverse">
+          <section className="flex lg:flex-row lg:justify-between flex-col-reverse">
             {/* Hospital List Section */}
             <HospitalSection hospitals={hospitals} />
             {/* Region List Section */}
             <RegionSection query={region} />
-          </div>
+          </section>
           {region === "전체" ? (
             <section className="flex justify-end mt-8">
               <BackToTop />
             </section>
           ) : null}
-        </div>
-      </div>
+        </main>
+      </body>
     </>
   );
 };

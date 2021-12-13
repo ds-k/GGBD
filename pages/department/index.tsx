@@ -21,8 +21,8 @@ const Department = ({ departments }: IProps) => {
         content={"진료과별로 정보를 공유할 수 있습니다."}
       />
       {/* Department Page */}
-      <div className="flex justify-center md:p-8 p-4 lg:mb-28">
-        <div className="lg:w-lg w-screen">
+      <body className="flex justify-center md:p-8 p-4 lg:mb-28">
+        <main className="lg:w-lg w-screen">
           {/* Title */}
           <Title
             title={"진료과별 이야기"}
@@ -32,7 +32,7 @@ const Department = ({ departments }: IProps) => {
           <section className="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-3 lg:gap-4 md:gap-4 gap-2 md:mt-4 mt-3 md:mb-8 mb-6">
             {departments.map((el) => {
               return (
-                <div key={el.id}>
+                <li key={el.id}>
                   <Link href={`/department/${el.name}`}>
                     <a>
                       <div className="flex justify-center items-center lg:h-16 md:h-16 h-12 border text-gray-main hover:text-blue-main border-gray-sub hover:border-blue-main cursor-pointer active:border-blue-sub active:text-blue-sub">
@@ -42,12 +42,12 @@ const Department = ({ departments }: IProps) => {
                       </div>
                     </a>
                   </Link>
-                </div>
+                </li>
               );
             })}
           </section>
-        </div>
-      </div>
+        </main>
+      </body>
     </>
   );
 };

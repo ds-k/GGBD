@@ -14,12 +14,12 @@ const DepartmentBoard = ({ department }: IDepartment) => {
     <>
       {/* headInfo */}
       <HeadInfo
-        title={`${name}의 이야기`}
+        title={`진료과별 이야기 | ${name}`}
         content={`${name}에 대해 알고계신 정보를 공유해 주세요.`}
       />
       {/* DepartmentBoard Page */}
-      <div className="flex justify-center md:p-8 p-4 h-screen">
-        <div className="lg:w-lg w-screen">
+      <body className="flex justify-center md:p-8 p-4 h-screen">
+        <main className="lg:w-lg w-screen">
           <section className="lg:mt-8 mt-4">
             <Link href={"/department"}>
               <a>
@@ -41,8 +41,8 @@ const DepartmentBoard = ({ department }: IDepartment) => {
               <span>{description}</span>
             </hgroup>
           </section>
-        </div>
-      </div>
+        </main>
+      </body>
     </>
   );
 };

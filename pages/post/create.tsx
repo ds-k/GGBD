@@ -165,8 +165,8 @@ const Create = (departments: DropboxCondition) => {
         </div>
       </section>
       {/* Middle Container */}
-      <div className="flex justify-center">
-        <div className="lg:w-lg w-screen p-4">
+      <body className="flex justify-center">
+        <main className="lg:w-lg w-screen p-4">
           {/* Choose Departments */}
           <section className="flex md:flex-row flex-col-reverse justify-between md:mb-8 mb-6">
             <div className="flex md:mt-5 cursor-pointer">
@@ -207,15 +207,15 @@ const Create = (departments: DropboxCondition) => {
               onChange={(e) => setDescription(e.target.value)}
             />
           </section>
-        </div>
-      </div>
+        </main>
+      </body>
       {/* Line */}
       <div className="w-full border-1/2 border-b border-gray-sub" />
       {/* Bottom Container */}
-      <section className="flex justify-center">
-        <div className="lg:w-lg w-screen p-4">
+      <body className="flex justify-center">
+        <main className="lg:w-lg w-screen p-4">
           {/* Quil Editor */}
-          <div className="mt-4">
+          <section className="mt-4">
             <ReactQuill
               theme="bubble"
               placeholder="남기고 싶은 기록을 자유롭게 적어주세요."
@@ -224,8 +224,9 @@ const Create = (departments: DropboxCondition) => {
               value={value}
               onChange={setValue}
             />
-          </div>
-          <div className="flex justify-center">
+          </section>
+          {/* Button Section */}
+          <section className="flex justify-center">
             <div className="my-12 grid grid-cols-2 gap-2">
               <MainBtn
                 context={"등록"}
@@ -233,9 +234,9 @@ const Create = (departments: DropboxCondition) => {
               />
               <SubBtn context={"취소"} handleClick={() => router.back()} />
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
+        </main>
+      </body>
     </>
   );
 };
