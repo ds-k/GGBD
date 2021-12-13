@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useWeather } from "../../hooks/useWeather";
 import { useDropbox } from "../../hooks/useDropbox";
@@ -13,6 +14,8 @@ import {
   modules,
   formats,
 } from "../../components/post/QuillEditor";
+import { useRecoilValue } from "recoil";
+import { userState } from "../../state/atom";
 
 interface DropboxCondition {
   departments: [{ id: number; name: string }];
@@ -20,13 +23,105 @@ interface DropboxCondition {
 
 const Create = (departments: DropboxCondition) => {
   const router = useRouter();
-
+  const { accessToken } = useRecoilValue(userState);
+  const { department, renderDropbox } = useDropbox(departments);
   const [weather, renderWeathers] = useWeather();
-  const { renderDropbox } = useDropbox(departments);
-  const [isPublic, setIsPublic] = useState<boolean>(false);
+
+  const [isPublic, setIsPublic] = useState<boolean>(true);
+  const [isActive, setIsActive] = useState<boolean>(true);
   const [isChange, setIsChange] = useState<boolean>(false);
-  const [isActive, setIsActive] = useState<boolean>(false);
+  const [photo, setPhoto] = useState<string>("");
+  const [photoId, setPhotoId] = useState<string>("");
   const [value, setValue] = useState("");
+  const [title, setTitle] = useState("");
+  const [summary, setSummary] = useState("");
+
+  const [isComplete, setIsComplete] = useState<boolean>(false);
+
+  useEffect(() => {
+    const getPhoto = async () => {
+      if (weather !== "" && accessToken) {
+        const result = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/photo/${weather}`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (result) {
+          setPhotoId(result.data.id);
+          setPhoto(result.data.img);
+        }
+      }
+    };
+    getPhoto();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [weather]);
+
+  const changePhoto = async () => {
+    if (weather !== "") {
+      const result = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/photo/${weather}?id=${photoId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (result) {
+        setPhotoId(result.data.id);
+        setPhoto(result.data.img);
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (
+      weather !== "" &&
+      photo !== "" &&
+      department !== "" &&
+      title !== "" &&
+      summary !== ""
+    ) {
+      setIsComplete(true);
+    } else {
+      setIsComplete(false);
+    }
+  }, [department, isComplete, photo, summary, title, weather]);
+
+  const handleClickPost = async () => {
+    if (isComplete) {
+      const result = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/post`,
+        {
+          weather,
+          photo,
+          value,
+          isActive,
+          isPublic,
+          department,
+          title,
+          summary,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "multipart/form-data",
+          },
+          withCredentials: true,
+        }
+      );
+
+      if (result) {
+        router.back();
+      }
+    }
+  };
 
   return (
     <>
@@ -40,24 +135,41 @@ const Create = (departments: DropboxCondition) => {
       <section className="flex flex-col justify-center items-center w-screen h-72 bg-gray-100">
         {weather === "" ? (
           <>
-            <div className="font-main font-nomal text-2xl text-gray-main">
+            <div className="z-10 font-main font-nomal text-2xl text-gray-main">
               내 감정의 날씨는?
             </div>
-            <div className="my-3 font-main font-nomal text-sm text-gray-main">
+            <div className="z-10 my-3 font-main font-nomal text-sm text-gray-main">
               선택하신 감정과 어울리는 대표 사진이 선정됩니다.
             </div>
           </>
         ) : (
-          <div
-            className="mb-8"
-            onMouseDown={() => setIsChange(true)}
-            onMouseUp={() => setIsChange(false)}
-          >
-            <ChangePhoto color={isChange ? "#0984C0" : "#AAA7B0"} />
-          </div>
+          <>
+            {photo === "" ? null : (
+              <Image
+                className="object-cover"
+                src={photo}
+                alt="sunny"
+                width={1920}
+                height={329}
+                layout="fixed"
+              />
+            )}
+            <div
+              className="mb-8 absolute z-10 "
+              onMouseDown={() => {
+                setIsChange(true);
+                changePhoto();
+              }}
+              onMouseUp={() => setIsChange(false)}
+            >
+              <ChangePhoto color={isChange ? "#0984C0" : "#AAA7B0"} />
+            </div>
+          </>
         )}
         {/* 날씨 선택 */}
-        <div className="w-screen flex justify-center">{renderWeathers()}</div>
+        <div className="absolute z-10 mt-28 w-screen flex justify-center">
+          {renderWeathers()}
+        </div>
       </section>
       {/* Middle Container */}
       <div className="flex justify-center">
@@ -92,12 +204,14 @@ const Create = (departments: DropboxCondition) => {
               maxLength={36}
               className="w-full md:mb-4 mb-2 font-main font-nomal md:text-3xl text-2xl placeholder-gray-sub text-gray-main outline-none"
               placeholder="글의 제목을 입력해 주세요."
+              onChange={(e) => setTitle(e.target.value)}
             />
             <input
               type="text"
               maxLength={54}
               className="w-full mb-4 font-main font-nomal md:text-xl text-lg placeholder-gray-sub text-gray-main outline-none"
               placeholder="글의 내용을 간략하게 설명해 주세요."
+              onChange={(e) => setSummary(e.target.value)}
             />
           </section>
         </div>
@@ -120,7 +234,7 @@ const Create = (departments: DropboxCondition) => {
           </div>
           <div className="flex justify-center">
             <div className="my-12 grid grid-cols-2 gap-2">
-              <MainBtn context={"등록"} />
+              <MainBtn context={"등록"} handleClick={() => handleClickPost()} />
               <SubBtn context={"취소"} handleClick={() => router.back()} />
             </div>
           </div>

@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 export const ReactQuill = dynamic(() => import("react-quill"), {
   ssr: false,
   loading: () => (
-    <div className="font-main font-nomal md:text-xl text-lg text-gray-sub">
+    <div className="font-main font-nomal md:text-xl text-lg text-gray-sub h-96">
       남기고 싶은 기록을 자유롭게 적어주세요.
     </div>
   ),
