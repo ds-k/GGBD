@@ -33,9 +33,9 @@ const HospitalSection = ({ hospitals }: IProps) => {
       <section>
         {hospitals.map((el) => {
           return (
-            <div
+            <li
               key={el.id}
-              className="flex justify-between items-center lg:mt-5 mt-2 lg:mb-8 mb-6 mx-2 "
+              className="list-none flex justify-between items-center lg:mt-5 mt-2 lg:mb-8 mb-6 mx-2 "
             >
               {/* Info Contents */}
               <div>
@@ -77,7 +77,7 @@ const HospitalSection = ({ hospitals }: IProps) => {
                   </div>
                 </a>
               </Link>
-            </div>
+            </li>
           );
         })}
       </section>

@@ -32,7 +32,7 @@ const Department = ({ departments }: IProps) => {
           <section className="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-3 lg:gap-4 md:gap-4 gap-2 md:mt-4 mt-3 md:mb-8 mb-6">
             {departments.map((el) => {
               return (
-                <li key={el.id}>
+                <li key={el.id} className="list-none">
                   <Link href={`/department/${el.name}`}>
                     <a>
                       <div className="flex justify-center items-center lg:h-16 md:h-16 h-12 border text-gray-main hover:text-blue-main border-gray-sub hover:border-blue-main cursor-pointer active:border-blue-sub active:text-blue-sub">

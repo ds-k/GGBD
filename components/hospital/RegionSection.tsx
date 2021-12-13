@@ -35,14 +35,14 @@ const RegionSection = ({ query }: IProps) => {
           return (
             <Link key={idx} href={`/hospital/${el.replace(" ", "-")}`}>
               <a onClick={() => setRegion(el)}>
-                <div
+                <li
                   className={
-                    "cursor-pointer my-1 font-sub font-normal lg:text-lg md:text-base lg:sm hover:text-blue-main active:text-blue-main " +
+                    "list-none cursor-pointer my-1 font-sub font-normal lg:text-lg md:text-base lg:sm hover:text-blue-main active:text-blue-main " +
                     (el === region ? "text-blue-main" : "text-gray-sub")
                   }
                 >
                   {el}
-                </div>
+                </li>
               </a>
             </Link>
           );
