@@ -7,6 +7,7 @@ interface IUseDropbox {
   department: string;
   setDepartment: Dispatch<SetStateAction<string>>;
   renderDropbox: (option?: optionCondition) => JSX.Element;
+  departmentId: number;
 }
 
 interface DropboxCondition {
@@ -18,12 +19,21 @@ type optionCondition = "selectNone";
 export const useDropbox = ({ departments }: DropboxCondition): IUseDropbox => {
   const [department, setDepartment] = useState<string>("");
 
+  let departmentId;
+  if (department !== "") {
+    departmentId = departments.filter((el) => el.name === department)[0].id;
+  } else {
+    departmentId = 0;
+  }
+
   const renderDropbox = (option?: optionCondition) => {
     return (
       <>
         <select
           className="cursor-pointer appearance-none mr-2 font-main font-nomal lg:text-xl text-lg text-gray-main outline-none "
-          onChange={(e) => setDepartment(e.target.value)}
+          onChange={(e) => {
+            setDepartment(e.target.value);
+          }}
         >
           {option ? (
             <option value="" hidden>
@@ -58,5 +68,5 @@ export const useDropbox = ({ departments }: DropboxCondition): IUseDropbox => {
     );
   };
 
-  return { department, setDepartment, renderDropbox };
+  return { department, departmentId, setDepartment, renderDropbox };
 };

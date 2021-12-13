@@ -23,20 +23,22 @@ interface DropboxCondition {
 
 const Create = (departments: DropboxCondition) => {
   const router = useRouter();
-  const { accessToken } = useRecoilValue(userState);
-  const { department, renderDropbox } = useDropbox(departments);
+
+  const { accessToken, id } = useRecoilValue(userState);
+  const { department, departmentId, renderDropbox } = useDropbox(departments);
   const [weather, renderWeathers] = useWeather();
 
   const [isPublic, setIsPublic] = useState<boolean>(true);
   const [isActive, setIsActive] = useState<boolean>(true);
   const [isChange, setIsChange] = useState<boolean>(false);
-  const [photo, setPhoto] = useState<string>("");
-  const [photoId, setPhotoId] = useState<string>("");
+
   const [value, setValue] = useState("");
   const [title, setTitle] = useState("");
-  const [summary, setSummary] = useState("");
-
-  const [isComplete, setIsComplete] = useState<boolean>(false);
+  const [description, setDescription] = useState("");
+  const [photo, setPhoto] = useState({
+    id: 0,
+    img: "",
+  });
 
   useEffect(() => {
     const getPhoto = async () => {
@@ -52,8 +54,7 @@ const Create = (departments: DropboxCondition) => {
         );
 
         if (result) {
-          setPhotoId(result.data.id);
-          setPhoto(result.data.img);
+          setPhoto({ img: result.data.img, id: result.data.id });
         }
       }
     };
@@ -64,7 +65,7 @@ const Create = (departments: DropboxCondition) => {
   const changePhoto = async () => {
     if (weather !== "") {
       const result = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/photo/${weather}?id=${photoId}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/photo/${weather}?id=${photo.id}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -74,51 +75,43 @@ const Create = (departments: DropboxCondition) => {
       );
 
       if (result) {
-        setPhotoId(result.data.id);
-        setPhoto(result.data.img);
+        setPhoto({ img: result.data.img, id: result.data.id });
       }
     }
   };
 
-  useEffect(() => {
+  const handleSubmitPost = async () => {
     if (
       weather !== "" &&
-      photo !== "" &&
+      photo.img !== "" &&
       department !== "" &&
       title !== "" &&
-      summary !== ""
+      description !== ""
     ) {
-      setIsComplete(true);
-    } else {
-      setIsComplete(false);
-    }
-  }, [department, isComplete, photo, summary, title, weather]);
-
-  const handleClickPost = async () => {
-    if (isComplete) {
       const result = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/post`,
         {
+          id,
           weather,
-          photo,
           value,
           isActive,
           isPublic,
-          department,
           title,
-          summary,
+          description,
+          departmentId,
+          thumbnail: photo.img,
         },
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "application/json",
           },
           withCredentials: true,
         }
       );
 
       if (result) {
-        router.back();
+        router.push(`/post/detail/${result.data.slug}`);
       }
     }
   };
@@ -144,10 +137,10 @@ const Create = (departments: DropboxCondition) => {
           </>
         ) : (
           <>
-            {photo === "" ? null : (
+            {photo.img === "" ? null : (
               <Image
                 className="object-cover"
-                src={photo}
+                src={photo.img}
                 alt="sunny"
                 width={1920}
                 height={329}
@@ -211,7 +204,7 @@ const Create = (departments: DropboxCondition) => {
               maxLength={54}
               className="w-full mb-4 font-main font-nomal md:text-xl text-lg placeholder-gray-sub text-gray-main outline-none"
               placeholder="글의 내용을 간략하게 설명해 주세요."
-              onChange={(e) => setSummary(e.target.value)}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </section>
         </div>
@@ -234,7 +227,10 @@ const Create = (departments: DropboxCondition) => {
           </div>
           <div className="flex justify-center">
             <div className="my-12 grid grid-cols-2 gap-2">
-              <MainBtn context={"등록"} handleClick={() => handleClickPost()} />
+              <MainBtn
+                context={"등록"}
+                handleClick={() => handleSubmitPost()}
+              />
               <SubBtn context={"취소"} handleClick={() => router.back()} />
             </div>
           </div>
