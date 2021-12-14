@@ -2,13 +2,13 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
 import WeatherBtn from "../components/common/WeatherBtn";
-type UseWeathersResult = [string, () => JSX.Element];
-type WeatherCondition = "맑음" | "구름" | "비" | "전체";
+export type WeatherCondition = "맑음" | "구름" | "비" | "전체" | "";
+type UseWeathersResult = [WeatherCondition, () => JSX.Element];
 
 export const useWeather = (
   labels: WeatherCondition[] = ["맑음", "구름", "비"]
 ): UseWeathersResult => {
-  const [weather, setWeather] = useState<string>("");
+  const [weather, setWeather] = useState<WeatherCondition>("");
 
   const renderWeathers = () => (
     <div className={`grid grid-cols-${labels.length} gap-2`}>
