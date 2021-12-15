@@ -7,9 +7,10 @@ import { WeatherCondition } from "../../hooks/useWeather";
 
 interface IProps {
   weather: WeatherCondition;
+  order: string;
 }
 
-const Carousel = ({ weather }: IProps) => {
+const Carousel = ({ weather, order }: IProps) => {
   const [currentCenter, setCurrentCenter] = useState(0);
   const [isLeftClick, setIsLeftClick] = useState(false);
   const [isRightClick, setIsRightClick] = useState(false);
@@ -40,7 +41,7 @@ const Carousel = ({ weather }: IProps) => {
               key={department.id}
               href={`/explore/${department.name.replace(" ", "-")}?id=${
                 department.id
-              }&weather=${weather}`}
+              }&weather=${weather}&by=${order}`}
             >
               <a
                 className={

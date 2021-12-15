@@ -109,7 +109,7 @@ const Drawer = () => {
           </div>
         </section>
         <section className="flex flex-col items-center gap-y-6">
-          <Link href="/explore/모든-글?id=0">
+          <Link href="/explore/모든-글?id=0&weather=전체&by=createdAt">
             <a
               className="text-xl text-gray-main font-main font-normal hover:font-bold hover:text-blue-main
             "

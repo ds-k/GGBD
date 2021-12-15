@@ -6,9 +6,12 @@ export type WeatherCondition = "맑음" | "구름" | "비" | "전체" | "";
 type UseWeathersResult = [WeatherCondition, () => JSX.Element];
 
 export const useWeather = (
-  labels: WeatherCondition[] = ["맑음", "구름", "비"]
+  labels: WeatherCondition[] = ["맑음", "구름", "비"],
+  initialWeather: WeatherCondition
 ): UseWeathersResult => {
-  const [weather, setWeather] = useState<WeatherCondition>("");
+  const [weather, setWeather] = useState<WeatherCondition>(
+    initialWeather ?? ""
+  );
 
   const renderWeathers = () => (
     <div className={`grid grid-cols-${labels.length} gap-2`}>

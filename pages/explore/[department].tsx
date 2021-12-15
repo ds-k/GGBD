@@ -1,24 +1,41 @@
-// import { useState } from "react";
+import { useState } from "react";
 import { GetServerSideProps } from "next";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import Link from "next/link";
 import Image from "next/image";
 import HeadInfo from "../../components/global/HeadInfo";
 import Title from "../../components/common/Title";
 import { useWeather } from "../../hooks/useWeather";
 import Carousel from "../../components/explore/Carousel";
+import PostList from "../../components/explore/PostList";
+import * as T from "../../types";
+interface IProps {
+  postData: T.PostType[];
+}
 
-const Explore = ({ postData }: any) => {
+const Explore = ({ postData }: IProps) => {
   const router = useRouter();
   const { department, id } = router.query;
-  const [weather, renderWeathers] = useWeather(["전체", "맑음", "구름", "비"]);
+  const [weather, renderWeathers] = useWeather(
+    ["전체", "맑음", "구름", "비"],
+    "전체"
+  );
+  const [order, setOrder] = useState("createdAt");
 
   useEffect(() => {
-    router.push(`/explore/${department}?id=${id}&weather=${weather}`);
+    router.push(
+      `/explore/${department}?id=${id}&weather=${weather}&by=${order}`
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [weather]);
+
+  useEffect(() => {
+    router.push(
+      `/explore/${department}?id=${id}&weather=${weather}&by=${order}`
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [order]);
 
   return (
     <>
@@ -33,7 +50,7 @@ const Explore = ({ postData }: any) => {
       {/* explore page */}
       <div className="flex justify-center md:p-8 p-4">
         <div className="lg:w-lg w-screen">
-          <body className="flex flex-col content-center">
+          <div className="flex flex-col content-center">
             <section>
               {/* title section */}
               <Title
@@ -43,7 +60,7 @@ const Explore = ({ postData }: any) => {
                 }
               />
               {/* carousel section */}
-              <Carousel weather={weather} />
+              <Carousel weather={weather} order={order} />
             </section>
             <section className="flex justify-center items-center my-10">
               <p className=" text-3xl text-black-main font-main font-bold">
@@ -61,75 +78,22 @@ const Explore = ({ postData }: any) => {
                     width={24}
                     height={24}
                   ></Image>
-                  <select className="ml-2 cursor-pointer appearance-none font-main font-nomal lg:text-xl text-lg text-gray-main outline-none ">
-                    <option>최신 순</option>
-                    <option>응원이 필요한 순</option>
+                  <select
+                    onChange={(e) => {
+                      setOrder(e.target.value);
+                    }}
+                    className="ml-2 cursor-pointer appearance-none font-main font-nomal lg:text-xl text-lg text-gray-main outline-none "
+                  >
+                    <option value="createdAt">최신 순</option>
+                    <option value="likes">응원이 필요한 순</option>
                   </select>
                 </div>
                 <div>{renderWeathers()}</div>
               </section>
               {/* post list section */}
-              <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-9 mt-8">
-                {postData.length === 0 ? (
-                  <div>데이터가 없습니다.</div>
-                ) : (
-                  postData.map((post: any) => {
-                    return (
-                      <Link key={post.id} href={`/post/detail/${post.slug}`}>
-                        <a>
-                          {/* card section */}
-                          <div className="">
-                            <Image
-                              src={post.thumbnail}
-                              alt={post.title}
-                              width={249}
-                              height={200}
-                            ></Image>
-                            <div className="flex items-center gap-3 my-1">
-                              <div className="flex items-center gap-1">
-                                <Image
-                                  src={`/images/explore/like.svg`}
-                                  alt="likes"
-                                  width={16}
-                                  height={16}
-                                />
-                                <span className=" text-sm font-main text-black-main">
-                                  {post.likes}
-                                </span>
-                              </div>
-                              <div className="flex items-center gap-1">
-                                <Image
-                                  src={`/images/explore/scrap.svg`}
-                                  alt="scraps"
-                                  width={16}
-                                  height={16}
-                                />
-                                <span className=" text-sm font-main text-black-main">
-                                  {post.scraps}
-                                </span>
-                              </div>
-                            </div>
-                            <div className="flex flex-col items-start  text-black-main font-main font-bold text-lg truncate">
-                              <Image
-                                src={`/images/explore/${post.weather}.svg`}
-                                alt={post.weather}
-                                width={16}
-                                height={16}
-                              ></Image>
-                              <span>{post.title}</span>
-                            </div>
-                            <div className="mt-1 text-gray-sub font-sub text-sm  line-clamp-2">
-                              {post.description}
-                            </div>
-                          </div>
-                        </a>
-                      </Link>
-                    );
-                  })
-                )}
-              </section>
+              <PostList postData={postData} />
             </section>
-          </body>
+          </div>
         </div>
       </div>
     </>
