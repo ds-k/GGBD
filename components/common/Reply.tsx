@@ -1,14 +1,20 @@
 import { useState } from "react";
+import axios from "axios";
 import Image from "next/image";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../state/atom";
+import { useRouter } from "next/router";
 import moment from "moment";
 import MoreBtn from "../common/MoreBtn";
 import MainBtn from "../common/MainBtn";
 
 interface IProps {
   placeholder: string;
-  reply: [
+  target: {
+    id: string;
+    name: string;
+  };
+  replies: [
     {
       id: number;
       users_id: number;
@@ -27,13 +33,40 @@ interface IProps {
   ];
 }
 
-const Reply = ({ reply, placeholder }: IProps) => {
+const Reply = ({ target, replies, placeholder }: IProps) => {
+  const router = useRouter();
+
   const user = useRecoilValue(userState);
   const [value, setValue] = useState<string>("");
 
+  const handleSubmitReply = async () => {
+    if (value !== "") {
+      const result = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/${target.name}/reply`,
+        {
+          target_id: target.id,
+          users_id: user.id,
+          reply: value,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${user.accessToken}`,
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+
+      if (result) {
+        setValue("");
+        router.replace(router.asPath);
+      }
+    }
+  };
+
   return (
     <main>
-      {reply.map((el) => {
+      {replies.map((el) => {
         return (
           <li key={el.id} className="list-none flex justify-between my-12">
             {/* Img Section */}
@@ -73,6 +106,7 @@ const Reply = ({ reply, placeholder }: IProps) => {
               className="outline-none w-full font-main text-black-main placeholder:text-gray-sub text-xl "
               type="text"
               placeholder={placeholder}
+              value={value}
               onChange={(e) => setValue(e.target.value)}
             />
             {/* Line */}
@@ -83,7 +117,7 @@ const Reply = ({ reply, placeholder }: IProps) => {
               }
             />
           </div>
-          <MainBtn context="등록" />
+          <MainBtn context="등록" handleClick={() => handleSubmitReply()} />
         </section>
       ) : null}
     </main>

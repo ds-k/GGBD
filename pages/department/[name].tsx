@@ -6,8 +6,12 @@ import HeadInfo from "../../components/global/HeadInfo";
 import Reply from "../../components/common/Reply";
 
 interface IProps {
-  department: { id: string; name: string; description: string };
-  reply: [
+  department: {
+    id: string;
+    name: string;
+    description: string;
+  };
+  replies: [
     {
       id: number;
       users_id: number;
@@ -26,8 +30,8 @@ interface IProps {
   ];
 }
 
-const DepartmentBoard = ({ department, reply }: IProps) => {
-  const { name, description } = department;
+const DepartmentBoard = ({ department, replies }: IProps) => {
+  const { name, description, id } = department;
 
   return (
     <>
@@ -67,7 +71,8 @@ const DepartmentBoard = ({ department, reply }: IProps) => {
           {/* Reply Container */}
           <section>
             <Reply
-              reply={reply}
+              target={{ id, name: "department" }}
+              replies={replies}
               placeholder={`${name}에 대한 정보를 공유해 주세요.`}
             />
           </section>
@@ -89,13 +94,13 @@ export const getServerSideProps: GetServerSideProps = async ({
   );
 
   const replyResData = replyRes.data;
-  const reply = replyResData["departments_replies"];
+  const replies = replyResData.departments_replies;
 
   delete replyResData.departments_replies;
 
   return {
     props: {
-      reply,
+      replies,
       department: replyResData,
     },
   };
