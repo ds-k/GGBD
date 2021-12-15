@@ -2,26 +2,26 @@ import { useState } from "react";
 import MoreIcon from "../icon/MoreIcon";
 
 const MoreBtn = () => {
-  const [isClick, setisClick] = useState<boolean>(false);
-  const [isOpen, setisOpen] = useState<boolean>(false);
+  const [isClick, setIsClick] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
     <>
       {isOpen ? (
         <div
           className="fixed inset-0 w-screen h-screen cursor-pointer"
-          onClick={() => setisOpen(false)}
+          onClick={() => setIsOpen(false)}
         />
       ) : null}
       <section
-        onClick={() => setisOpen(!isOpen)}
+        onClick={() => setIsOpen(!isOpen)}
         className="flex flex-col items-end"
       >
         <div
           onMouseDown={() => {
-            setisClick(true);
+            setIsClick(true);
           }}
-          onMouseUp={() => setisClick(false)}
+          onMouseUp={() => setIsClick(false)}
         >
           <MoreIcon color={isClick ? "#0984C0" : "#AAA7B0"} />
         </div>
