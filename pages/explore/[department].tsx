@@ -84,7 +84,7 @@ const Explore = ({ postData }: IProps) => {
             </section>
             <section className="flex justify-between md:justify-center items-center my-10">
               <div
-                className="md:hidden"
+                className="md:hidden cursor-pointer"
                 onClick={() => pushDepartmentRoute(curDepartmentIdx - 1)}
                 onMouseDown={() => {
                   setIsLeftClick(true);
@@ -99,7 +99,7 @@ const Explore = ({ postData }: IProps) => {
                 {department === "모든-글" ? "모든 글" : department}
               </p>
               <div
-                className="md:hidden"
+                className="md:hidden cursor-pointer"
                 onClick={() => pushDepartmentRoute(curDepartmentIdx + 1)}
                 onMouseDown={() => {
                   setIsRightClick(true);
