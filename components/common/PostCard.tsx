@@ -1,6 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import { PostType } from "../../types";
+import moment from "moment";
+import "moment/locale/ko";
 
 interface IProps {
   post: PostType;
@@ -52,10 +54,10 @@ const PostCard = ({ post }: IProps) => {
         {post.description}
       </div>
       <div className="mt-1 flex justify-between">
-        <span className="text-gray-sub text-xs font-main">
-          {post.createdAt}
-        </span>
         <span className="text-gray-sub text-xs font-main">by. {post.user}</span>
+        <span className="text-gray-sub text-xs font-main">
+          {moment(post.createdAt).fromNow()}
+        </span>
       </div>
     </div>
   );
