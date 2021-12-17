@@ -9,9 +9,13 @@ import Title from "../../components/common/Title";
 import { useWeather } from "../../hooks/useWeather";
 import Carousel from "../../components/explore/Carousel";
 import PostList from "../../components/explore/PostList";
-import * as T from "../../types";
+import { PostType } from "../../types";
+import departmentData from "../../data/departmentData.json";
+import ArrowLeft from "../../components/icon/ArrowLeft";
+import ArrowRight from "../../components/icon/ArrowRight";
+
 interface IProps {
-  postData: T.PostType[];
+  postData: PostType[];
 }
 
 const Explore = ({ postData }: IProps) => {
@@ -22,6 +26,22 @@ const Explore = ({ postData }: IProps) => {
     "전체"
   );
   const [order, setOrder] = useState("createdAt");
+  const [isLeftClick, setIsLeftClick] = useState(false);
+  const [isRightClick, setIsRightClick] = useState(false);
+
+  const curDepartmentIdx = departmentData.findIndex(
+    (department) => String(department.id) === id
+  );
+
+  const pushDepartmentRoute = (routeIdx: number) => {
+    if (routeIdx === -1) {
+      routeIdx = 42;
+    } else if (routeIdx === 43) {
+      routeIdx = 1;
+    }
+    const { name, id } = departmentData[routeIdx];
+    router.push(`/explore/${name}?id=${id}&weather=${weather}&by=${order}`);
+  };
 
   useEffect(() => {
     router.push(
@@ -62,16 +82,40 @@ const Explore = ({ postData }: IProps) => {
               {/* carousel section */}
               <Carousel weather={weather} order={order} />
             </section>
-            <section className="flex justify-center items-center my-10">
+            <section className="flex justify-between md:justify-center items-center my-10">
+              <div
+                className="md:hidden"
+                onClick={() => pushDepartmentRoute(curDepartmentIdx - 1)}
+                onMouseDown={() => {
+                  setIsLeftClick(true);
+                }}
+                onMouseUp={() => {
+                  setIsLeftClick(false);
+                }}
+              >
+                <ArrowLeft color={isLeftClick ? "#0984c0" : "#AAA7B0"} />
+              </div>
               <p className=" text-3xl text-black-main font-main font-bold">
                 {department === "모든-글" ? "모든 글" : department}
               </p>
+              <div
+                className="md:hidden"
+                onClick={() => pushDepartmentRoute(curDepartmentIdx + 1)}
+                onMouseDown={() => {
+                  setIsRightClick(true);
+                }}
+                onMouseUp={() => {
+                  setIsRightClick(false);
+                }}
+              >
+                <ArrowRight color={isRightClick ? "#0984c0" : "#AAA7B0"} />
+              </div>
             </section>
             <section className="mb-48">
               {/* options section */}
-              <section className="flex justify-between">
+              <section className="flex flex-col md:flex-row items-start md:justify-between">
                 {/* dropbox */}
-                <div className="flex items-center">
+                <div className="my-4 md:my-0 flex items-center">
                   <Image
                     src="/images/explore/downArrow.svg"
                     alt="downArrow"
