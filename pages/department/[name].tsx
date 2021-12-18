@@ -53,6 +53,8 @@ const DepartmentBoard = ({ department, replies }: IProps) => {
           {/* Reply Container */}
           <section>
             <Reply
+              comment={"공유된 정보가 없습니다."}
+              description={`${name}에 대해 알고계신 정보를 공유해 주세요.`}
               target={{ id, name: "department" }}
               replies={replies}
               placeholder={`${name}에 대한 정보를 공유해 주세요.`}
