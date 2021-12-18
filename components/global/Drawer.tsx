@@ -84,9 +84,9 @@ const Drawer = () => {
           <div>
             {user.isLogin ? (
               <div className="flex gap-3">
-                <Link href="/post/create">
+                <Link href={`/record/post?id=${user.id}`}>
                   <a onClick={() => setIsDrawerOpen(false)}>
-                    <SubBtn context={"글쓰기"} />
+                    <SubBtn context={"나의 기록"} />
                   </a>
                 </Link>
                 <Link href="/">
