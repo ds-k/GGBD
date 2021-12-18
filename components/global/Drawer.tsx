@@ -86,7 +86,7 @@ const Drawer = () => {
               <div className="flex gap-3">
                 <Link href={`/record/post?id=${user.id}`}>
                   <a onClick={() => setIsDrawerOpen(false)}>
-                    <SubBtn context={"나의 기록"} />
+                    <MainBtn context={"나의 기록"} />
                   </a>
                 </Link>
                 <Link href="/">
@@ -96,7 +96,7 @@ const Drawer = () => {
                       clearUserState();
                     }}
                   >
-                    <MainBtn context={"로그아웃"} />
+                    <SubBtn context={"로그아웃"} />
                   </a>
                 </Link>
               </div>

@@ -24,7 +24,7 @@ const RegionSection = ({ query }: IProps) => {
   ];
 
   return (
-    <div className="flex flex-col lg:mt-0 md:mt-3 mt-4">
+    <aside className="flex flex-col lg:mt-0 md:mt-3 mt-4">
       {/* List Title */}
       <section>
         <ListTitle title={"지역"} />
@@ -48,7 +48,7 @@ const RegionSection = ({ query }: IProps) => {
           );
         })}
       </section>
-    </div>
+    </aside>
   );
 };
 
