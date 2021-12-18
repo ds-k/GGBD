@@ -9,7 +9,7 @@ import Title from "../../components/common/Title";
 import { useWeather } from "../../hooks/useWeather";
 import Carousel from "../../components/explore/Carousel";
 import PostList from "../../components/explore/PostList";
-import { PostType } from "../../types";
+import { PostType } from "../../types/post";
 import departmentData from "../../data/departmentData.json";
 import ArrowLeft from "../../components/icon/ArrowLeft";
 import ArrowRight from "../../components/icon/ArrowRight";
@@ -132,7 +132,7 @@ const Explore = ({ postData }: IProps) => {
                     <option value="likes">응원이 필요한 순</option>
                   </select>
                 </div>
-                <div>{renderWeathers()}</div>
+                <div className="grid grid-cols-4 gap-2">{renderWeathers()}</div>
               </section>
               {/* post list section */}
               <PostList postData={postData} />
