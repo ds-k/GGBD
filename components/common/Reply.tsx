@@ -5,8 +5,10 @@ import { useRecoilValue } from "recoil";
 import { userState } from "../../state/atom";
 import { useRouter } from "next/router";
 import moment from "moment";
-import MoreBtn from "../common/MoreBtn";
+import MoreIcon from "../icon/MoreIcon";
 import MainBtn from "../common/MainBtn";
+import { ReplyType } from "../../types/reply";
+import "moment/locale/ko";
 
 interface IProps {
   placeholder: string;
@@ -14,23 +16,7 @@ interface IProps {
     id: string;
     name: string;
   };
-  replies: [
-    {
-      id: number;
-      users_id: number;
-      departments_id: number;
-      reply: string;
-      is_reported: number;
-      is_blocked: boolean;
-      createdAt: string;
-      updatedAt: string;
-      user: {
-        id: number;
-        nickname: string;
-        img: string;
-      };
-    }
-  ];
+  replies: ReplyType[];
 }
 
 const Reply = ({ target, replies, placeholder }: IProps) => {
@@ -38,6 +24,8 @@ const Reply = ({ target, replies, placeholder }: IProps) => {
 
   const user = useRecoilValue(userState);
   const [value, setValue] = useState<string>("");
+  const [isClick, setIsClick] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleSubmitReply = async () => {
     if (value !== "") {
@@ -66,6 +54,28 @@ const Reply = ({ target, replies, placeholder }: IProps) => {
 
   return (
     <main>
+      {/* Input Section */}
+      {user.isLogin ? (
+        <section className="flex items-end mt-12 mb-16">
+          <div className="w-full mr-4 ">
+            <input
+              className="outline-none w-full font-main text-black-main placeholder:text-gray-sub text-xl "
+              type="text"
+              placeholder={placeholder}
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+            />
+            {/* Line */}
+            <div
+              className={
+                "mt-1 w-full border-1/2 border-b " +
+                (value === "" ? "border-gray-sub" : "border-blue-main")
+              }
+            />
+          </div>
+          <MainBtn context="등록" handleClick={() => handleSubmitReply()} />
+        </section>
+      ) : null}
       {replies.map((el) => {
         return (
           <li key={el.id} className="list-none flex justify-between my-12">
@@ -93,33 +103,43 @@ const Reply = ({ target, replies, placeholder }: IProps) => {
             </section>
             {/* Edit Section */}
             <section className=" w-8">
-              {user.id === el.user.id ? <MoreBtn /> : null}
+              {user.id === el.user.id ? (
+                <>
+                  {isOpen ? (
+                    <div
+                      className="fixed inset-0 w-screen h-screen cursor-pointer"
+                      onClick={() => setIsOpen(false)}
+                    />
+                  ) : null}
+                  <section
+                    onClick={() => setIsOpen(!isOpen)}
+                    className="flex flex-col items-end"
+                  >
+                    <div
+                      onMouseDown={() => {
+                        setIsClick(true);
+                      }}
+                      onMouseUp={() => setIsClick(false)}
+                    >
+                      <MoreIcon color={isClick ? "#0984C0" : "#AAA7B0"} />
+                    </div>
+                    {isOpen ? (
+                      <section className="absolute flex mt-7 flex-col font-sub text-base w-24 mr-1 text-gray-sub bg-white border border-gray-sub">
+                        <span className="flex justify-center items-center cursor-pointer h-9 hover:text-blue-main active:text-blue-sub border-b border-gray-sub">
+                          수정
+                        </span>
+                        <span className="flex justify-center items-center cursor-pointer h-9 hover:text-blue-main active:text-blue-sub">
+                          삭제
+                        </span>
+                      </section>
+                    ) : null}
+                  </section>
+                </>
+              ) : null}
             </section>
           </li>
         );
       })}
-      {/* Input Section */}
-      {user.isLogin ? (
-        <section className="flex items-end mt-32 mb-16">
-          <div className="w-full mr-4 ">
-            <input
-              className="outline-none w-full font-main text-black-main placeholder:text-gray-sub text-xl "
-              type="text"
-              placeholder={placeholder}
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
-            />
-            {/* Line */}
-            <div
-              className={
-                "mt-1 w-full border-1/2 border-b " +
-                (value === "" ? "border-gray-sub" : "border-blue-main")
-              }
-            />
-          </div>
-          <MainBtn context="등록" handleClick={() => handleSubmitReply()} />
-        </section>
-      ) : null}
     </main>
   );
 };

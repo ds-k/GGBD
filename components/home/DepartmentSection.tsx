@@ -1,14 +1,10 @@
 import { useState } from "react";
 import MainBtn from "../common/MainBtn";
 import Link from "next/link";
+import { DepartmentType } from "../../types/department";
 
 interface IProps {
-  departments: [
-    {
-      id: number;
-      name: string;
-    }
-  ];
+  departments: DepartmentType[];
 }
 
 const DepartmentSection = ({ departments }: IProps) => {

@@ -4,30 +4,12 @@ import { GetServerSideProps } from "next";
 import Image from "next/image";
 import HeadInfo from "../../components/global/HeadInfo";
 import Reply from "../../components/common/Reply";
+import { ReplyType } from "../../types/reply";
+import { DepartmentType } from "../../types/department";
 
 interface IProps {
-  department: {
-    id: string;
-    name: string;
-    description: string;
-  };
-  replies: [
-    {
-      id: number;
-      users_id: number;
-      departments_id: number;
-      reply: string;
-      is_reported: number;
-      is_blocked: boolean;
-      createdAt: string;
-      updatedAt: string;
-      user: {
-        id: number;
-        nickname: string;
-        img: string;
-      };
-    }
-  ];
+  department: DepartmentType;
+  replies: ReplyType[];
 }
 
 const DepartmentBoard = ({ department, replies }: IProps) => {

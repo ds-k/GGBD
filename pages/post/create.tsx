@@ -16,9 +16,10 @@ import {
 } from "../../components/post/QuillEditor";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../state/atom";
+import { DepartmentType } from "../../types/department";
 
 interface DropboxCondition {
-  departments: [{ id: number; name: string }];
+  departments: DepartmentType[];
 }
 
 const Create = (departments: DropboxCondition) => {

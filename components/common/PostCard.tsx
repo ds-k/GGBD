@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { PostType } from "../../types";
+import { PostType } from "../../types/post";
 import moment from "moment";
 import "moment/locale/ko";
 
