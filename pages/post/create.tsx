@@ -215,6 +215,9 @@ const Create = (departments: DropboxCondition) => {
       {/* Bottom Container */}
       <body className="flex justify-center">
         <main className="lg:w-lg w-screen p-4">
+          <div className="text-right font-sub font-normal text-sm text-blue-main">
+            ※ 드래그를 하면 글에 스타일을 입힐 수 있습니다.
+          </div>
           {/* Quil Editor */}
           <section className="mt-4">
             <ReactQuill
