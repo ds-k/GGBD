@@ -11,7 +11,7 @@ const Like = () => {
         content={"공감병동에서 응원한 글입니다."}
       />
       {/* Record Page */}
-      <body className="flex justify-center md:p-8 p-4 lg:mb-28">
+      <body className="flex justify-center md:p-8 p-4">
         <main className="lg:w-lg w-screen">
           {/* Nav Section */}
           <NavSection tap={"응원한 글"} />

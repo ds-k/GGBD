@@ -7,7 +7,7 @@ interface IProps {
 
 export const NoData = ({ comment, description }: IProps) => {
   return (
-    <section className="flex flex-col items-center h-full">
+    <section className="flex flex-col items-center mb-40">
       <Image
         src="/images/global/noData.svg"
         alt="intro"
