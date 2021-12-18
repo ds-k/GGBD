@@ -4,9 +4,10 @@ import Title from "../components/common/Title";
 import DepartmentSection from "../components/home/DepartmentSection";
 import PostSection from "../components/home/PostSection";
 import BackToTop from "../components/common/BackToTop";
+import { DepartmentType } from "../types/department";
 
 interface IProps {
-  departments: [{ id: number; name: string }];
+  departments: DepartmentType[];
 }
 
 const Home = ({ departments }: IProps) => {
