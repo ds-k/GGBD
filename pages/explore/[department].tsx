@@ -1,18 +1,17 @@
-import { useState } from "react";
-import { GetServerSideProps } from "next";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
 import axios from "axios";
 import Image from "next/image";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { useWeather } from "../../hooks/useWeather";
 import HeadInfo from "../../components/global/HeadInfo";
 import Title from "../../components/common/Title";
-import { useWeather } from "../../hooks/useWeather";
 import Carousel from "../../components/explore/Carousel";
 import PostList from "../../components/common/PostList";
-import { PostType } from "../../types/post";
 import departmentData from "../../data/departmentData.json";
 import ArrowLeft from "../../components/icon/ArrowLeft";
 import ArrowRight from "../../components/icon/ArrowRight";
+import { GetServerSideProps } from "next";
+import { PostType } from "../../types/post";
 
 interface IProps {
   postData: PostType[];
@@ -80,7 +79,7 @@ const Explore = ({ postData }: IProps) => {
                 }
               />
               {/* carousel section */}
-              <Carousel weather={weather} order={order} />
+              <Carousel weather={weather} order={order} id={id} />
             </section>
             <section className="flex justify-between md:justify-center items-center my-10">
               <div
@@ -95,7 +94,7 @@ const Explore = ({ postData }: IProps) => {
               >
                 <ArrowLeft color={isLeftClick ? "#0984c0" : "#AAA7B0"} />
               </div>
-              <p className=" text-3xl text-black-main font-main font-bold">
+              <p className=" text-3xl text-black-main font-main font-bold select-none">
                 {department === "모든-글" ? "모든 글" : department}
               </p>
               <div
@@ -135,7 +134,11 @@ const Explore = ({ postData }: IProps) => {
                 <div className="grid grid-cols-4 gap-2">{renderWeathers()}</div>
               </section>
               {/* post list section */}
-              <PostList postData={postData} />
+              {postData.length === 0 ? (
+                <div>데이터가 없넹</div>
+              ) : (
+                <PostList postData={postData} />
+              )}
             </section>
           </div>
         </div>

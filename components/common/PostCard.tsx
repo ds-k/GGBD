@@ -16,8 +16,9 @@ const PostCard = ({ post }: IProps) => {
         alt={post.title}
         width={249}
         height={200}
+        layout="responsive"
       ></Image>
-      <div className="flex items-center gap-3 my-1">
+      <div className="flex items-center gap-3 mt-2 ">
         <div className="flex items-center gap-1">
           <Image
             src={`/images/explore/like.svg`}
@@ -33,15 +34,15 @@ const PostCard = ({ post }: IProps) => {
           <Image
             src={`/images/explore/scrap.svg`}
             alt="scraps"
-            width={16}
-            height={16}
+            width={18}
+            height={18}
           />
           <span className=" text-sm font-main text-black-main">
             {post.scraps}
           </span>
         </div>
       </div>
-      <div className="flex flex-col items-start  text-black-main font-main font-bold text-lg truncate">
+      <div className="flex flex-col items-start  text-black-main font-main font-bold text-lg text-ellipsis line-clamp-1 ">
         <span>{post.title}</span>
       </div>
       <div className="mt-1 text-gray-sub font-main text-sm h-10 line-clamp-2">

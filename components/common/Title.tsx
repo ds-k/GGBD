@@ -5,7 +5,7 @@ interface IProps {
 }
 const Title = ({ title, firstSubTitle, secondSubTitle }: IProps) => {
   return (
-    <section className="lg:mt-8 mt-4">
+    <section className="lg:mt-8 mt-4 select-none">
       <header className="font-main font-bold lg:text-3xl md:text-2xl text-xl lg:mb-2 text-black-main">
         {title}
       </header>
