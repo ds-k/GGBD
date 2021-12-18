@@ -1,6 +1,8 @@
 import { useState } from "react";
 import MainBtn from "../common/MainBtn";
 import Link from "next/link";
+import Title from "../common/Title";
+
 import { DepartmentType } from "../../types/department";
 
 interface IProps {
@@ -11,7 +13,12 @@ const DepartmentSection = ({ departments }: IProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
-    <div>
+    <section className=" md:mt-12 mt-6">
+      <Title
+        title={"진료과별 이야기"}
+        firstSubTitle={"진료과별로 정보를 공유할 수 있습니다."}
+        secondSubTitle={"여러분도 함께해주세요."}
+      />
       {/* Department Card */}
       <section className="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-3 lg:gap-4 md:gap-4 gap-2 lg:mt-4 md:mt-4 mt-3">
         {departments.slice(0, 18).map((el) => {
@@ -55,7 +62,7 @@ const DepartmentSection = ({ departments }: IProps) => {
           <MainBtn context={"더보기"} handleClick={() => setIsOpen(!isOpen)} />
         )}
       </section>
-    </div>
+    </section>
   );
 };
 
