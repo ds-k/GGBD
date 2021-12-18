@@ -18,9 +18,7 @@ const Scrap = () => {
           {/* Post Section */}
           <NoData
             comment={"스크랩한 글이 없습니다."}
-            description={
-              "힘이 되는 글을 발견했다면 스크랩을 통해 기록해 보세요."
-            }
+            description={"힘이 되는 글을 발견했다면 스크랩해보세요."}
           />
         </main>
       </body>
