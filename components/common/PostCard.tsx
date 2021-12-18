@@ -42,22 +42,16 @@ const PostCard = ({ post }: IProps) => {
         </div>
       </div>
       <div className="flex flex-col items-start  text-black-main font-main font-bold text-lg truncate">
-        <Image
-          src={`/images/explore/${post.weather}.svg`}
-          alt={post.weather}
-          width={16}
-          height={16}
-        ></Image>
         <span>{post.title}</span>
       </div>
-      <div className="mt-1 text-gray-sub font-sub text-sm  line-clamp-2">
+      <div className="mt-1 text-gray-sub font-main text-sm  line-clamp-2">
         {post.description}
       </div>
-      <div className="mt-1 flex justify-between">
-        <span className="text-gray-sub text-xs font-main">by. {post.user}</span>
+      <div className="mt-1 pt-1 flex justify-between border-t border-gray-200">
         <span className="text-gray-sub text-xs font-main">
-          {moment(post.createdAt).fromNow()}
+          {moment(post.createdAt).format("LL")}, {post.weather}
         </span>
+        <span className="text-gray-sub text-xs font-main">by. {post.user}</span>
       </div>
     </div>
   );
