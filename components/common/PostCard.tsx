@@ -44,10 +44,10 @@ const PostCard = ({ post }: IProps) => {
       <div className="flex flex-col items-start  text-black-main font-main font-bold text-lg truncate">
         <span>{post.title}</span>
       </div>
-      <div className="mt-1 text-gray-sub font-main text-sm  line-clamp-2">
+      <div className="mt-1 text-gray-sub font-main text-sm h-10 line-clamp-2">
         {post.description}
       </div>
-      <div className="mt-1 pt-1 flex justify-between border-t border-gray-200">
+      <div className="mt-1 pt-1 flex-col lg:flex-row flex justify-between border-t border-gray-200">
         <span className="text-gray-sub text-xs font-main">
           {moment(post.createdAt).format("LL")}, {post.weather}
         </span>
