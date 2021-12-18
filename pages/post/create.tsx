@@ -129,10 +129,10 @@ const Create = (departments: DropboxCondition) => {
       <section className="flex flex-col justify-center items-center w-screen h-72 bg-gray-100">
         {weather === "" ? (
           <>
-            <div className="z-10 font-main font-nomal text-2xl text-gray-main">
+            <div className="z-10 font-main font-normal text-2xl text-gray-main">
               내 감정의 날씨는?
             </div>
-            <div className="z-10 my-3 font-main font-nomal text-sm text-gray-main">
+            <div className="z-10 my-3 font-main font-normal text-sm text-gray-main">
               선택하신 감정과 어울리는 대표 사진이 선정됩니다.
             </div>
           </>
@@ -175,14 +175,14 @@ const Create = (departments: DropboxCondition) => {
             </div>
             {/* Toggle */}
             <div className="flex md:mb-0 mt-4 mb-8 items-center justify-end">
-              <div className="mr-2 font-main font-nomal lg:text-lg text-base text-gray-main">
+              <div className="mr-2 font-main font-normal lg:text-lg text-base text-gray-main">
                 글 공개 여부
               </div>
               <Toggle
                 isClick={isPublic}
                 handleClick={() => setIsPublic(!isPublic)}
               />
-              <div className="lg:ml-6 ml-4 mx-2 font-main font-nomal lg:text-lg text-base text-gray-main">
+              <div className="lg:ml-6 ml-4 mx-2 font-main font-normal lg:text-lg text-base text-gray-main">
                 댓글 활성화 여부
               </div>
               <Toggle
