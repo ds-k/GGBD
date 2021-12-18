@@ -1,5 +1,5 @@
 import React from "react";
-import { PostType } from "../../types";
+import { PostType } from "../../types/post";
 import Link from "next/link";
 import PostCard from "../common/PostCard";
 

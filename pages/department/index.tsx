@@ -2,14 +2,10 @@ import axios from "axios";
 import HeadInfo from "../../components/global/HeadInfo";
 import Link from "next/link";
 import Title from "../../components/common/Title";
+import { DepartmentType } from "../../types/department";
 
 interface IProps {
-  departments: [
-    {
-      id: number;
-      name: string;
-    }
-  ];
+  departments: DepartmentType[];
 }
 
 const Department = ({ departments }: IProps) => {

@@ -2,16 +2,17 @@
 /* eslint-disable no-unused-vars */
 import { Dispatch, SetStateAction, useState } from "react";
 import Image from "next/image";
+import { DepartmentType } from "../types/department";
 
 interface IUseDropbox {
   department: string;
   setDepartment: Dispatch<SetStateAction<string>>;
   renderDropbox: (option?: optionCondition) => JSX.Element;
-  departmentId: number;
+  departmentId: string;
 }
 
 interface DropboxCondition {
-  departments: [{ id: number; name: string }];
+  departments: DepartmentType[];
 }
 
 type optionCondition = "selectNone";
@@ -23,7 +24,7 @@ export const useDropbox = ({ departments }: DropboxCondition): IUseDropbox => {
   if (department !== "") {
     departmentId = departments.filter((el) => el.name === department)[0].id;
   } else {
-    departmentId = 0;
+    departmentId = "0";
   }
 
   const renderDropbox = (option?: optionCondition) => {
