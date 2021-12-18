@@ -1,10 +1,8 @@
 module.exports = {
-  purge: [
+  content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
-    "./hooks/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: false, // or 'media' or 'class'
   theme: {
     screens: {
       md: "600px",
@@ -16,6 +14,25 @@ module.exports = {
       google: ["Roboto", "sans-serif"],
     },
     extend: {
+      typography: {
+        DEFAULT: {
+          css: {
+            h1: {
+              color: "#2c2c2b",
+              fontSize: "1.875em",
+            },
+            h2: {
+              color: "#2c2c2b",
+            },
+            p: {
+              color: "#565759",
+            },
+            blockquote: {
+              color: "#2c2c2b",
+            },
+          },
+        },
+      },
       width: {
         sm: "320px",
         md: "700px",
@@ -67,5 +84,8 @@ module.exports = {
       fill: ["active"],
     },
   },
-  plugins: [require("@tailwindcss/line-clamp")],
+  plugins: [
+    require("@tailwindcss/typography"),
+    require("@tailwindcss/line-clamp"),
+  ],
 };

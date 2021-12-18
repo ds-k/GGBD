@@ -14,7 +14,7 @@ export const useWeather = (
   );
 
   const renderWeathers = () => (
-    <div className={`grid grid-cols-${labels.length} gap-2`}>
+    <>
       {labels.map((label, idx) => {
         return (
           <WeatherBtn
@@ -25,7 +25,7 @@ export const useWeather = (
           />
         );
       })}
-    </div>
+    </>
   );
 
   return [weather, renderWeathers];
