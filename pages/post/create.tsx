@@ -27,7 +27,7 @@ const Create = (departments: DropboxCondition) => {
 
   const { accessToken, id } = useRecoilValue(userState);
   const { department, departmentId, renderDropbox } = useDropbox(departments);
-  const [weather, renderWeathers] = useWeather();
+  const [weather, renderWeathers] = useWeather(["맑음", "구름", "비"], "");
 
   const [isPublic, setIsPublic] = useState<boolean>(true);
   const [isActive, setIsActive] = useState<boolean>(true);
@@ -162,7 +162,7 @@ const Create = (departments: DropboxCondition) => {
         )}
         {/* 날씨 선택 */}
         <div className="absolute z-10 mt-28 w-screen flex justify-center">
-          {renderWeathers()}
+          <div className="grid grid-cols-3 gap-2">{renderWeathers()}</div>
         </div>
       </section>
       {/* Middle Container */}
@@ -196,14 +196,14 @@ const Create = (departments: DropboxCondition) => {
             <input
               type="text"
               maxLength={36}
-              className="w-full md:mb-4 mb-2 font-main font-nomal md:text-3xl text-2xl placeholder-gray-sub text-gray-main outline-none"
+              className="w-full md:mb-4 mb-2 font-main font-normal md:text-3xl text-2xl placeholder-gray-sub text-gray-main outline-none"
               placeholder="글의 제목을 입력해 주세요."
               onChange={(e) => setTitle(e.target.value)}
             />
             <input
               type="text"
               maxLength={54}
-              className="w-full mb-4 font-main font-nomal md:text-xl text-lg placeholder-gray-sub text-gray-main outline-none"
+              className="w-full mb-4 font-main font-normal md:text-xl text-lg placeholder-gray-sub text-gray-main outline-none"
               placeholder="글의 내용을 간략하게 설명해 주세요."
               onChange={(e) => setDescription(e.target.value)}
             />

@@ -55,23 +55,24 @@ const Detail = ({ postData }: any) => {
           </section>
           {/* Title & description */}
           <section>
-            <div className="w-full md:mb-4 mb-2 font-main font-nomal md:text-3xl text-2xl placeholder-gray-sub text-gray-main outline-none">
+            <div className="w-full md:mb-4 mb-2 font-main font-bold md:text-3xl text-2xl  text-black-main ">
               {postData.title}
             </div>
-            <div className="w-full mb-4 font-main font-nomal md:text-xl text-lg placeholder-gray-sub text-gray-main outline-none">
+            <div className="w-full mb-4 font-main font-normal md:text-xl text-lg  text-black-main ">
               {postData.description}
             </div>
           </section>
-          {/* Line */}
-          <div className="w-full border-1/2 border-b border-gray-sub" />
-          <body className="flex justify-center">
-            <main className="lg:w-lg w-screen p-4">
-              {/* Quil Editor */}
-              <section className="mt-4">
-                <div dangerouslySetInnerHTML={{ __html: postData.body }}></div>
-              </section>
-            </main>
-          </body>
+        </main>
+      </body>
+      {/* Line */}
+      <div className="w-full border-1/2 border-b border-gray-sub" />
+      <body className="flex justify-center">
+        <main className="lg:w-lg w-screen p-4 mt-4">
+          {/* Quil Editor */}
+          <article
+            className="prose prose-blue max-w-none font-main text-gray-main"
+            dangerouslySetInnerHTML={{ __html: postData.body }}
+          ></article>
         </main>
       </body>
     </>
