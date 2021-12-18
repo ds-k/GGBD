@@ -8,7 +8,7 @@ import HeadInfo from "../../components/global/HeadInfo";
 import Title from "../../components/common/Title";
 import { useWeather } from "../../hooks/useWeather";
 import Carousel from "../../components/explore/Carousel";
-import PostList from "../../components/explore/PostList";
+import PostList from "../../components/common/PostList";
 import { PostType } from "../../types/post";
 import departmentData from "../../data/departmentData.json";
 import ArrowLeft from "../../components/icon/ArrowLeft";

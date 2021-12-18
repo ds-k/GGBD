@@ -1,5 +1,6 @@
 // import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import HeadInfo from "../../components/global/HeadInfo";
 import MainBtn from "../../components/common/MainBtn";
 import SubBtn from "../../components/common/SubBtn";
@@ -7,7 +8,7 @@ import { useRecoilValue } from "recoil";
 import { userState } from "../../state/atom";
 
 const Profile = () => {
-  const { nickname, description, img } = useRecoilValue(userState);
+  const { id, nickname, description, img } = useRecoilValue(userState);
 
   return (
     <>
@@ -34,8 +35,12 @@ const Profile = () => {
                 {description}
               </section>
               <section className="flex gap-3 py-2">
-                <MainBtn context={"시작하기"} handleClick={() => {}} />
-                <SubBtn context={"글쓰기"} handleClick={() => {}} />
+                <Link href={`/record/post?id=${id}`}>
+                  <a>
+                    <MainBtn context={"나의 기록"} />
+                  </a>
+                </Link>
+                <SubBtn context={"회원 탈퇴"} handleClick={() => {}} />
               </section>
             </div>
           </section>
