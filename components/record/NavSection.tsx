@@ -18,7 +18,7 @@ export const NavSection = ({ tap }: IProps) => {
         firstSubTitle={`${nickname}님의 공감병동 활동 기록입니다.`}
       />
       {/* Tap */}
-      <div className="grid grid-cols-3 h-12 cursor-pointer my-8 font-sub font-normal ">
+      <div className="grid grid-cols-3 h-12 cursor-pointer my-8 font-sub font-normal md:text-base text-sm">
         <Link href={`/record/post?id=${id}`}>
           <a
             className={
