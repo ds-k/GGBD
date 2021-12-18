@@ -9,10 +9,13 @@ import MoreIcon from "../icon/MoreIcon";
 import MainBtn from "../common/MainBtn";
 import SubBtn from "../common/SubBtn";
 import { ReplyType } from "../../types/reply";
+import { NoData } from "./NoData";
 import "moment/locale/ko";
 
 interface IProps {
   placeholder: string;
+  comment: string;
+  description: string;
   target: {
     id: string;
     name: string;
@@ -20,7 +23,13 @@ interface IProps {
   replies: ReplyType[];
 }
 
-const Reply = ({ target, replies, placeholder }: IProps) => {
+const Reply = ({
+  target,
+  replies,
+  placeholder,
+  comment,
+  description,
+}: IProps) => {
   const router = useRouter();
 
   const user = useRecoilValue(userState);
@@ -123,111 +132,117 @@ const Reply = ({ target, replies, placeholder }: IProps) => {
           <MainBtn context="등록" handleClick={() => handleSubmitReply()} />
         </section>
       ) : null}
-      {replies.map((el) => {
-        return (
-          <li key={el.id} className="list-none flex justify-between my-12">
-            {/* Img Section */}
-            <section className="w-16 h-16 mt-1">
-              <Image
-                src={el.user.img}
-                alt="profile"
-                width={58}
-                height={58}
-                className="rounded-full"
-              />
-            </section>
-            {/* Content Section */}
-            <section className=" ml-4 w-full">
-              <span className="font-main font-bold text-lg text-blue-main">
-                {el.user.nickname}
-              </span>
-              <span className="ml-2 font-main font-normal text-base text-gray-sub">
-                {moment(el.createdAt).format("LL")}
-              </span>
-              <div className=" font-main font-normal md:text-xl text-base text-black-main mt-1">
-                {edit.isEdit && el.id === id ? (
-                  <>
-                    <input
-                      className="w-full outline-none border-1/2 border-b border-blue-main pb-1"
-                      type="text"
-                      value={edit.reply}
-                      onChange={(e) =>
-                        setEdit({ isEdit: true, reply: e.target.value })
-                      }
-                      autoFocus
-                    />
-                    <div className="flex justify-end mt-4">
-                      <div className="grid grid-cols-2 gap-2">
-                        <MainBtn
-                          context="수정"
-                          handleClick={() => {
-                            handleEditReply();
+      {replies.length === 0 ? (
+        <NoData comment={comment} description={description} />
+      ) : (
+        <>
+          {replies.map((el) => {
+            return (
+              <li key={el.id} className="list-none flex justify-between my-12">
+                {/* Img Section */}
+                <section className="w-16 h-16 mt-1">
+                  <Image
+                    src={el.user.img}
+                    alt="profile"
+                    width={58}
+                    height={58}
+                    className="rounded-full"
+                  />
+                </section>
+                {/* Content Section */}
+                <section className=" ml-4 w-full">
+                  <span className="font-main font-bold text-lg text-blue-main">
+                    {el.user.nickname}
+                  </span>
+                  <span className="ml-2 font-main font-normal text-base text-gray-sub">
+                    {moment(el.createdAt).format("LL")}
+                  </span>
+                  <div className=" font-main font-normal md:text-xl text-base text-black-main mt-1">
+                    {edit.isEdit && el.id === id ? (
+                      <>
+                        <input
+                          className="w-full outline-none border-1/2 border-b border-blue-main pb-1"
+                          type="text"
+                          value={edit.reply}
+                          onChange={(e) =>
+                            setEdit({ isEdit: true, reply: e.target.value })
+                          }
+                          autoFocus
+                        />
+                        <div className="flex justify-end mt-4">
+                          <div className="grid grid-cols-2 gap-2">
+                            <MainBtn
+                              context="수정"
+                              handleClick={() => {
+                                handleEditReply();
+                              }}
+                            />
+                            <SubBtn
+                              context="취소"
+                              handleClick={() =>
+                                setEdit({ isEdit: false, reply: "" })
+                              }
+                            />
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <span>{el.reply}</span>
+                    )}
+                  </div>
+                </section>
+                {/* Edit Section */}
+                <section className="w-8">
+                  {user.id === el.user.id ? (
+                    <div>
+                      {isOpen && el.id === id ? (
+                        <div
+                          className="fixed inset-0 w-screen h-screen cursor-pointer"
+                          onClick={() => setIsOpen(false)}
+                        />
+                      ) : null}
+                      <section
+                        onClick={() => {
+                          setIsOpen(!isOpen);
+                          setId(el.id);
+                        }}
+                        className="flex flex-col items-end"
+                      >
+                        <div
+                          onMouseDown={() => {
+                            setIsClick(true);
                           }}
-                        />
-                        <SubBtn
-                          context="취소"
-                          handleClick={() =>
-                            setEdit({ isEdit: false, reply: "" })
-                          }
-                        />
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <span>{el.reply}</span>
-                )}
-              </div>
-            </section>
-            {/* Edit Section */}
-            <section className="w-8">
-              {user.id === el.user.id ? (
-                <div>
-                  {isOpen && el.id === id ? (
-                    <div
-                      className="fixed inset-0 w-screen h-screen cursor-pointer"
-                      onClick={() => setIsOpen(false)}
-                    />
-                  ) : null}
-                  <section
-                    onClick={() => {
-                      setIsOpen(!isOpen);
-                      setId(el.id);
-                    }}
-                    className="flex flex-col items-end"
-                  >
-                    <div
-                      onMouseDown={() => {
-                        setIsClick(true);
-                      }}
-                      onMouseUp={() => setIsClick(false)}
-                    >
-                      <MoreIcon color={isClick ? "#0984C0" : "#AAA7B0"} />
-                    </div>
-                    {isOpen && el.id === id ? (
-                      <section className="absolute flex mt-7 flex-col font-sub text-base w-24 mr-1 text-gray-sub bg-white border border-gray-sub">
-                        <span
-                          className="flex justify-center items-center cursor-pointer h-9 hover:text-blue-main active:text-blue-sub border-b border-gray-sub"
-                          onClick={() =>
-                            setEdit({ isEdit: true, reply: el.reply })
-                          }
+                          onMouseUp={() => setIsClick(false)}
                         >
-                          수정
-                        </span>
-                        <span
-                          className="flex justify-center items-center cursor-pointer h-9 hover:text-blue-main active:text-blue-sub"
-                          onClick={() => handleDeleteReply()}
-                        >
-                          삭제
-                        </span>
+                          <MoreIcon color={isClick ? "#0984C0" : "#AAA7B0"} />
+                        </div>
+                        {isOpen && el.id === id ? (
+                          <section className="absolute flex mt-7 flex-col font-sub text-base w-24 mr-1 text-gray-sub bg-white border border-gray-sub">
+                            <span
+                              className="flex justify-center items-center cursor-pointer h-9 hover:text-blue-main active:text-blue-sub border-b border-gray-sub"
+                              onClick={() =>
+                                setEdit({ isEdit: true, reply: el.reply })
+                              }
+                            >
+                              수정
+                            </span>
+                            <span
+                              className="flex justify-center items-center cursor-pointer h-9 hover:text-blue-main active:text-blue-sub"
+                              onClick={() => handleDeleteReply()}
+                            >
+                              삭제
+                            </span>
+                          </section>
+                        ) : null}
                       </section>
-                    ) : null}
-                  </section>
-                </div>
-              ) : null}
-            </section>
-          </li>
-        );
-      })}
+                    </div>
+                  ) : null}
+                </section>
+              </li>
+            );
+          })}
+        </>
+      )}
     </main>
   );
 };
