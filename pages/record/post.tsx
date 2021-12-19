@@ -1,6 +1,6 @@
 import axios from "axios";
 import { GetServerSideProps } from "next";
-import PostList from "../../components/common/PostList";
+import PostList from "../../components/post/PostList";
 import HeadInfo from "../../components/global/HeadInfo";
 import { NavSection } from "../../components/record/NavSection";
 import { PostType } from "../../types/post";

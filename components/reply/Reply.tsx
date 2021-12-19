@@ -8,8 +8,9 @@ import moment from "moment";
 import MoreIcon from "../icon/MoreIcon";
 import MainBtn from "../common/MainBtn";
 import SubBtn from "../common/SubBtn";
+import BackToTop from "../common/BackToTop";
 import { ReplyType } from "../../types/reply";
-import { NoData } from "./NoData";
+import { NoData } from "../common/NoData";
 import "moment/locale/ko";
 
 interface IProps {
@@ -243,6 +244,10 @@ const Reply = ({
           })}
         </>
       )}
+      {/* BackToTop Section */}
+      <section className="flex justify-end mt-28">
+        <BackToTop />
+      </section>
     </main>
   );
 };

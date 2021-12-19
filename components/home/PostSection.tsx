@@ -1,6 +1,6 @@
 import Title from "../common/Title";
 import Link from "next/link";
-import PostCard from "../common/PostCard";
+import PostCard from "../post/PostCard";
 import { PostType } from "../../types/post";
 
 interface IProps {

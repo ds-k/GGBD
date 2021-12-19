@@ -3,7 +3,7 @@ import axios from "axios";
 import { GetServerSideProps } from "next";
 import Image from "next/image";
 import HeadInfo from "../../components/global/HeadInfo";
-import Reply from "../../components/common/Reply";
+import Reply from "../../components/reply/Reply";
 import { ReplyType } from "../../types/reply";
 import { DepartmentType } from "../../types/department";
 
@@ -51,7 +51,7 @@ const DepartmentBoard = ({ department, replies }: IProps) => {
             </hgroup>
           </section>
           {/* Reply Container */}
-          <section className="mb-48">
+          <section>
             <Reply
               comment={"공유된 정보가 없습니다."}
               description={`${name}에 대해 알고계신 정보를 공유해 주세요.`}

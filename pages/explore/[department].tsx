@@ -6,7 +6,7 @@ import { useWeather } from "../../hooks/useWeather";
 import HeadInfo from "../../components/global/HeadInfo";
 import Title from "../../components/common/Title";
 import Carousel from "../../components/explore/Carousel";
-import PostList from "../../components/common/PostList";
+import PostList from "../../components/post/PostList";
 import departmentData from "../../data/departmentData.json";
 import ArrowLeft from "../../components/icon/ArrowLeft";
 import ArrowRight from "../../components/icon/ArrowRight";
