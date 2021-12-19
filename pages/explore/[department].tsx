@@ -112,7 +112,7 @@ const Explore = ({ postData }: IProps) => {
             </section>
             <section className="mb-48">
               {/* options section */}
-              <section className="flex flex-col md:flex-row items-start md:justify-between">
+              <section className="flex flex-col md:flex-row md:justify-between">
                 {/* dropbox */}
                 <div className="my-4 md:my-0 flex items-center">
                   <Image
@@ -131,7 +131,11 @@ const Explore = ({ postData }: IProps) => {
                     <option value="likes">응원이 필요한 순</option>
                   </select>
                 </div>
-                <div className="grid grid-cols-4 gap-2">{renderWeathers()}</div>
+                <div className="flex justify-end">
+                  <div className="grid grid-cols-4 gap-2">
+                    {renderWeathers()}
+                  </div>
+                </div>
               </section>
               {/* post list section */}
               {postData.length === 0 ? (

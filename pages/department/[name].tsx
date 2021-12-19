@@ -51,7 +51,7 @@ const DepartmentBoard = ({ department, replies }: IProps) => {
             </hgroup>
           </section>
           {/* Reply Container */}
-          <section>
+          <section className="mb-48">
             <Reply
               comment={"공유된 정보가 없습니다."}
               description={`${name}에 대해 알고계신 정보를 공유해 주세요.`}
