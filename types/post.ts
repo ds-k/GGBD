@@ -16,4 +16,5 @@ export type PostType = {
   users_id: number;
   weather: string;
   user: string;
+  department?: { name: string; id: string } | any;
 };

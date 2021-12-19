@@ -2,18 +2,28 @@ import HeadInfo from "../../../components/global/HeadInfo";
 import { GetServerSideProps } from "next";
 import axios from "axios";
 import Image from "next/image";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 import { userState } from "../../../state/atom";
+import MoreIcon from "../../../components/icon/MoreIcon";
 import Toggle from "../../../components/common/Toggle";
 import moment from "moment";
 import "moment/locale/ko";
+import { PostType } from "../../../types/post";
 
-const Detail = ({ postData }: any) => {
+interface IProps {
+  postData: PostType;
+}
+
+const Detail = ({ postData }: IProps) => {
   const router = useRouter();
 
   const [user, setUser] = useRecoilState(userState);
+
+  const [isClick, setIsClick] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const [likes, setLikes] = useState({
     isLike: false,
@@ -152,6 +162,23 @@ const Detail = ({ postData }: any) => {
     }
   };
 
+  const handleDeletePost = async () => {
+    const result = await axios.delete(
+      `${process.env.NEXT_PUBLIC_API_URL}/post/?id=${postData.id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${user.accessToken}`,
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      }
+    );
+
+    if (result) {
+      router.back();
+    }
+  };
+
   return (
     <>
       {/* headInfo */}
@@ -222,10 +249,57 @@ const Detail = ({ postData }: any) => {
           <section className="flex justify-start mb-3 mt-6 font-main font-nomal lg:text-lg text-base text-gray-main">
             {moment(postData.createdAt).format("LL")}, {postData.weather}
           </section>
-          {/* Title & description */}
+          {/* Title & Edit & description */}
           <section>
-            <div className="w-full md:mb-4 mb-2 font-main font-bold md:text-3xl text-2xl  text-black-main ">
-              {postData.title}
+            <div className="flex justify-between">
+              <div className="w-full md:mb-4 mb-2 font-main font-bold md:text-3xl text-2xl  text-black-main ">
+                {postData.title}
+              </div>
+              {/* Edit Section */}
+              <div className="w-8">
+                {user.id === postData.users_id ? (
+                  <div>
+                    {isOpen ? (
+                      <div
+                        className="fixed inset-0 w-screen h-screen cursor-pointer"
+                        onClick={() => setIsOpen(false)}
+                      />
+                    ) : null}
+                    <div
+                      onClick={() => {
+                        setIsOpen(!isOpen);
+                      }}
+                      className="flex flex-col items-end"
+                    >
+                      <div
+                        onMouseDown={() => {
+                          setIsClick(true);
+                        }}
+                        onMouseUp={() => setIsClick(false)}
+                      >
+                        <MoreIcon color={isClick ? "#0984C0" : "#AAA7B0"} />
+                      </div>
+                      {isOpen ? (
+                        <div className="absolute flex mt-7 flex-col font-sub text-base w-24 mr-1 text-gray-sub bg-white border border-gray-sub">
+                          <Link href={`/post/edit/${postData.slug}`}>
+                            <a>
+                              <span className="flex justify-center items-center cursor-pointer h-9 hover:text-blue-main active:text-blue-sub border-b border-gray-sub">
+                                수정
+                              </span>
+                            </a>
+                          </Link>
+                          <span
+                            className="flex justify-center items-center cursor-pointer h-9 hover:text-blue-main active:text-blue-sub"
+                            onClick={() => handleDeletePost()}
+                          >
+                            삭제
+                          </span>
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+                ) : null}
+              </div>
             </div>
             <div className="w-full mb-4 font-main font-normal md:text-xl text-lg  text-black-main ">
               {postData.description}
