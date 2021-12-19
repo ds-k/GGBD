@@ -90,7 +90,7 @@ const Create = (departments: DropboxCondition) => {
       description !== ""
     ) {
       const result = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/post`,
+        `${process.env.NEXT_PUBLIC_API_URL}/post/post`,
         {
           id,
           weather,
@@ -139,14 +139,16 @@ const Create = (departments: DropboxCondition) => {
         ) : (
           <>
             {photo.img === "" ? null : (
-              <Image
-                className="object-cover"
-                src={photo.img}
-                alt="sunny"
-                width={1920}
-                height={329}
-                layout="fixed"
-              />
+              <div className="flex justify-center items-center w-screen">
+                <Image
+                  className="flex justify-center object-cover w-screen"
+                  src={photo.img}
+                  alt="sunny"
+                  width={1920}
+                  height={288}
+                  layout="fixed"
+                />
+              </div>
             )}
             <div
               className="mb-8 absolute z-10 "
@@ -166,7 +168,7 @@ const Create = (departments: DropboxCondition) => {
         </div>
       </section>
       {/* Middle Container */}
-      <body className="flex justify-center">
+      <div className="flex justify-center">
         <main className="lg:w-lg w-screen p-4">
           {/* Choose Departments */}
           <section className="flex md:flex-row flex-col-reverse justify-between md:mb-8 mb-6">
@@ -209,11 +211,11 @@ const Create = (departments: DropboxCondition) => {
             />
           </section>
         </main>
-      </body>
+      </div>
       {/* Line */}
       <div className="w-full border-1/2 border-b border-gray-sub" />
       {/* Bottom Container */}
-      <body className="flex justify-center">
+      <div className="flex justify-center">
         <main className="lg:w-lg w-screen p-4">
           <div className="text-right font-sub font-normal text-sm text-blue-main">
             ※ 드래그를 하면 글에 스타일을 입힐 수 있습니다.
@@ -240,7 +242,7 @@ const Create = (departments: DropboxCondition) => {
             </div>
           </section>
         </main>
-      </body>
+      </div>
     </>
   );
 };

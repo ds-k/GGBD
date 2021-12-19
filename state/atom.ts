@@ -16,6 +16,8 @@ export const userState = atom({
     nickname: "",
     social_id: "",
     updatedAt: "",
+    likes: [{ posts_id: 0 }],
+    scraps: [{ posts_id: 0 }],
   },
   effects_UNSTABLE: [persistAtom],
 });
