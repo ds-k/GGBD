@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
 import WeatherBtn from "../components/common/WeatherBtn";
-export type WeatherCondition = "맑음" | "구름" | "비" | "전체" | "";
+export type WeatherCondition = "맑음" | "구름" | "비" | "전체" | "" | string;
 type UseWeathersResult = [WeatherCondition, () => JSX.Element];
 
 export const useWeather = (
