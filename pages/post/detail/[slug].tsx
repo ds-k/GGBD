@@ -12,6 +12,7 @@ import Toggle from "../../../components/common/Toggle";
 import moment from "moment";
 import "moment/locale/ko";
 import { PostType } from "../../../types/post";
+import Reply from "../../../components/reply/Reply";
 
 interface IProps {
   postData: PostType;
@@ -312,13 +313,35 @@ const Detail = ({ postData }: IProps) => {
       </div>
       {/* Line */}
       <div className="w-full border-1/2 border-b border-gray-sub" />
-      <div className="flex justify-center mb-48">
+      <div className="flex justify-center">
         <main className="lg:w-lg w-screen p-4 mt-4">
           {/* Quil Editor */}
           <article
             className="prose prose-blue max-w-none font-main text-gray-main"
             dangerouslySetInnerHTML={{ __html: postData.body }}
           ></article>
+          {/* Reply Container */}
+          <section>
+            {postData.allow_reply && postData.posts_replies !== undefined ? (
+              <>
+                <div className="font-main font-bold text-black-main text-xl mt-12">
+                  댓글
+                </div>
+                <div className="font-main font-normal text-gray-sub text-lg mb-8">
+                  {`총 ${postData.posts_replies.length}개의 댓글이 남겨져 있습니다.`}
+                </div>
+                <Reply
+                  target={{ id: String(postData.id), name: "post" }}
+                  replies={postData.posts_replies}
+                  placeholder={`${postData.user}님에게 응원의 댓글을 남겨주세요.`}
+                />
+              </>
+            ) : (
+              <div className="mt-48 text-right font-sub font-normal text-sm text-gray-sub">
+                ※ 댓글 기능이 비활성화 되어있습니다.
+              </div>
+            )}
+          </section>
         </main>
       </div>
     </>

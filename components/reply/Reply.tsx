@@ -15,8 +15,8 @@ import "moment/locale/ko";
 
 interface IProps {
   placeholder: string;
-  comment: string;
-  description: string;
+  comment?: string;
+  description?: string;
   target: {
     id: string;
     name: string;
@@ -111,7 +111,7 @@ const Reply = ({
       {/* Input Section */}
       {user.isLogin ? (
         <section
-          className="flex items-end mt-12 mb-16"
+          className="flex items-end mt-12 mb-14"
           onClick={() => setEdit({ isEdit: false, reply: "" })}
         >
           <div className="w-full mr-4 ">
@@ -133,13 +133,13 @@ const Reply = ({
           <MainBtn context="등록" handleClick={() => handleSubmitReply()} />
         </section>
       ) : null}
-      {replies.length === 0 ? (
+      {replies.length === 0 && comment !== undefined ? (
         <NoData comment={comment} description={description} />
       ) : (
         <>
           {replies.map((el) => {
             return (
-              <li key={el.id} className="list-none flex justify-between my-12">
+              <li key={el.id} className="list-none flex justify-between mb-12">
                 {/* Img Section */}
                 <section className="w-16 h-16 mt-1">
                   <Image
@@ -193,7 +193,7 @@ const Reply = ({
                   </div>
                 </section>
                 {/* Edit Section */}
-                <section className="w-8">
+                <section className="w-8 mt-2">
                   {user.id === el.user.id ? (
                     <div>
                       {isOpen && el.id === id ? (
