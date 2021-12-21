@@ -12,7 +12,7 @@ const Layout = ({ children }: IProps) => {
     <>
       <HeadInfo />
       <Nav />
-      <div>{children}</div>
+      <div className="pt-14 min-h-screen">{children}</div>
       <Footer />
     </>
   );

@@ -26,7 +26,7 @@ const DepartmentBoard = ({ department, replies }: IProps) => {
       <body className="flex justify-center md:p-8 p-4">
         <main className="lg:w-lg w-screen">
           {/* Title Container */}
-          <section className="lg:mt-8 mt-4 mb-12">
+          <section className="mt-2 mb-12">
             {/* Go to department */}
             <Link href={"/department"}>
               <a>

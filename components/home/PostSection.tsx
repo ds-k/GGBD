@@ -31,7 +31,7 @@ const PostSection = ({ byCreatedAtData, byLikesData }: IProps) => {
 
   return (
     <section>
-      <section className="md:mt-12 mt-6">
+      <section className="md:mt-20 mt-16">
         <Title
           title={"응원이 필요한 글"}
           firstSubTitle={"응원이 필요한 글들을 모았습니다."}
@@ -41,7 +41,7 @@ const PostSection = ({ byCreatedAtData, byLikesData }: IProps) => {
           {renderCard(byLikesData)}
         </section>
       </section>
-      <section className=" md:mt-12 mt-6">
+      <section className=" md:mt-20 mt-16">
         <Title
           title={"방금 올라온 글"}
           firstSubTitle={"가장 최근에 올라온 글을 모았습니다."}

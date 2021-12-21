@@ -15,7 +15,7 @@ const Nav = () => {
   const { isLogin } = useRecoilValue(userState);
 
   return (
-    <nav className="h-14 flex  w-full px-6 justify-between border-b border-gray-sub">
+    <nav className="h-14 flex fixed z-20 w-full px-6 justify-between border-b border-gray-sub bg-white">
       <div className="flex items-center">
         <Image
           src="/images/global/drawer.svg"

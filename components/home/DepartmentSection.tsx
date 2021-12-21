@@ -13,7 +13,7 @@ const DepartmentSection = ({ departments }: IProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
-    <section className=" md:mt-12 mt-6">
+    <section className=" md:mt-20 mt-16">
       <Title
         title={"진료과별 이야기"}
         firstSubTitle={"진료과별로 정보를 공유할 수 있습니다."}
