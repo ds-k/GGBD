@@ -83,16 +83,16 @@ const Detail = ({ postData }: IProps) => {
       }
     );
 
-    if (result) {
+    if (result.status === 201) {
       if (context === "postLike") {
         setUser({
           ...user,
-          likes: [...user.likes, result.data.posts_id],
+          likes: [...user.likes, { posts_id: postData.id }],
         });
       } else {
         setUser({
           ...user,
-          scraps: [...user.scraps, result.data.posts_id],
+          scraps: [...user.scraps, { posts_id: postData.id }],
         });
       }
       router.replace(router.asPath);
@@ -111,21 +111,19 @@ const Detail = ({ postData }: IProps) => {
       }
     );
 
-    if (result) {
+    if (result.status === 200) {
       if (context === "deleteLike") {
         setUser({
           ...user,
           likes: user.likes.filter(
-            (like: { posts_id: number }) =>
-              like.posts_id === result.data.posts_id.posts_id
+            (like: { posts_id: number }) => like.posts_id !== postData.id
           ),
         });
       } else {
         setUser({
           ...user,
           scraps: user.scraps.filter(
-            (scrap: { posts_id: number }) =>
-              scrap.posts_id === result.data.posts_id.posts_id
+            (scrap: { posts_id: number }) => scrap.posts_id !== postData.id
           ),
         });
       }
