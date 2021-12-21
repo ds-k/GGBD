@@ -125,7 +125,9 @@ const Edit = ({ postData, departments }: IProps) => {
 
   if (title !== postData.title) {
     formData.title = title;
-    formData.slug = title
+    formData.slug = `${postData.users_id} ${new Date()
+      .toLocaleDateString()
+      .replaceAll(". ", "")} ${title}`
       // eslint-disable-next-line no-useless-escape
       .replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gim, "")
       .replace(/\s/g, "-");
@@ -246,7 +248,7 @@ const Edit = ({ postData, departments }: IProps) => {
               type="text"
               maxLength={36}
               value={title}
-              className="w-full md:mb-4 mb-2 font-main font-normal md:text-3xl text-2xl placeholder-gray-sub text-gray-main outline-none"
+              className="w-full md:mb-4 mb-2 font-main font-bold md:text-3xl text-2xl placeholder-gray-sub text-black-main outline-none"
               placeholder="글의 제목을 입력해 주세요."
               onChange={(e) => setTitle(e.target.value)}
             />
@@ -254,7 +256,7 @@ const Edit = ({ postData, departments }: IProps) => {
               type="text"
               maxLength={54}
               value={description}
-              className="w-full mb-4 font-main font-normal md:text-xl text-lg placeholder-gray-sub text-gray-main outline-none"
+              className="w-full mb-4 font-main font-normal md:text-xl text-lg placeholder-gray-sub text-black-main outline-none"
               placeholder="글의 내용을 간략하게 설명해 주세요."
               onChange={(e) => setDescription(e.target.value)}
             />
