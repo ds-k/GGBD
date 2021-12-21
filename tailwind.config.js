@@ -38,6 +38,10 @@ module.exports = {
         md: "700px",
         lg: "1032px",
       },
+      height: {
+        sm: "220px",
+        md: "500px",
+      },
       colors: {
         transparent: "transparent",
         current: "currentColor",
