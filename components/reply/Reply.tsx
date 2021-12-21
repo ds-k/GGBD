@@ -11,6 +11,7 @@ import SubBtn from "../common/SubBtn";
 import BackToTop from "../common/BackToTop";
 import { ReplyType } from "../../types/reply";
 import { NoData } from "../common/NoData";
+import CommonModal from "../modal/CommonModal";
 import "moment/locale/ko";
 
 interface IProps {
@@ -38,6 +39,7 @@ const Reply = ({
   const [id, setId] = useState<number>(0);
   const [isClick, setIsClick] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [edit, setEdit] = useState({
     isEdit: false,
     reply: "",
@@ -108,6 +110,14 @@ const Reply = ({
 
   return (
     <main>
+      {isModalOpen ? (
+        <CommonModal
+          setIsModalOpen={setIsModalOpen}
+          title={"정말 삭제하시겠습니까?"}
+          dsecription={"한번 삭제한 글은 복구가 불가능합니다."}
+          handleClick={handleDeleteReply}
+        />
+      ) : null}
       {/* Input Section */}
       {user.isLogin ? (
         <section
@@ -229,7 +239,7 @@ const Reply = ({
                             </span>
                             <span
                               className="flex justify-center items-center cursor-pointer h-9 hover:text-blue-main active:text-blue-sub"
-                              onClick={() => handleDeleteReply()}
+                              onClick={() => setIsModalOpen(true)}
                             >
                               삭제
                             </span>

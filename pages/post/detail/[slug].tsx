@@ -13,6 +13,7 @@ import moment from "moment";
 import "moment/locale/ko";
 import { PostType } from "../../../types/post";
 import Reply from "../../../components/reply/Reply";
+import CommonModal from "../../../components/modal/CommonModal";
 
 interface IProps {
   postData: PostType;
@@ -25,6 +26,7 @@ const Detail = ({ postData }: IProps) => {
 
   const [isClick, setIsClick] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const [likes, setLikes] = useState({
     isLike: false,
@@ -194,6 +196,14 @@ const Detail = ({ postData }: IProps) => {
           layout="fixed"
         />
       </div>
+      {isModalOpen ? (
+        <CommonModal
+          setIsModalOpen={setIsModalOpen}
+          title={"정말 삭제하시겠습니까?"}
+          dsecription={"한번 삭제한 글은 복구가 불가능합니다."}
+          handleClick={handleDeletePost}
+        />
+      ) : null}
       <div className="flex justify-center">
         <main className="lg:w-lg w-screen p-4">
           <div className="flex md:flex-row flex-col-reverse justify-between md:items-center md:mb-4 mb-2">
@@ -291,7 +301,7 @@ const Detail = ({ postData }: IProps) => {
                           </Link>
                           <span
                             className="flex justify-center items-center cursor-pointer h-9 hover:text-blue-main active:text-blue-sub"
-                            onClick={() => handleDeletePost()}
+                            onClick={() => setIsModalOpen(true)}
                           >
                             삭제
                           </span>

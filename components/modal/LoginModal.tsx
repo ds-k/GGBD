@@ -29,14 +29,14 @@ const LoginModal = () => {
   return (
     <main
       className={
-        " fixed overflow-hidden z-50 inset-0 transform  bg-gray-sub bg-opacity-25" +
+        " fixed overflow-hidden z-50 inset-0 transform bg-gray-sub bg-opacity-25" +
         (isLoginModalOpen ? "  " : " hidden ")
       }
     >
       {/* Modal section */}
       <section
         className={
-          "flex flex-col items-center mx-4  justify-center md:w-screen md:max-w-lg md:mx-auto lg:mx-auto my-auto rounded-2xl inset-0 absolute bg-white h-1/2  shadow-xl"
+          "flex flex-col items-center mx-4 justify-center md:w-screen md:max-w-lg my-auto md:mx-auto h-md rounded-2xl inset-0 absolute bg-white shadow-xl"
         }
       >
         {/* logo div */}
