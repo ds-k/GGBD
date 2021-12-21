@@ -7,7 +7,7 @@ import axios from "axios";
 const Search = () => {
   const [isListOpen, setIsListOpen] = useState(false);
   const [queryValue, setQueryValue] = useState("");
-  const [searchResult, setSearchResult] = useState([{ title: "" }]);
+  const [searchResult, setSearchResult] = useState([{ id: 0, title: "" }]);
 
   console.log(searchResult);
   const getSearchResult = async (q: SetStateAction<string>) => {
@@ -65,13 +65,14 @@ const Search = () => {
                     <span className=" text-lg text-gray-main ml-4 font-main">
                       글 검색
                     </span>
-
-                    {searchResult.map((post) => {
-                      return <li key={post.title}>{post.title}</li>;
-                    })}
                   </div>
+                  <article className="flex flex-col">
+                    {searchResult.map((post) => {
+                      return <li key={post.id}>{post.title}</li>;
+                    })}
+                  </article>
                 </section>
-                <section className="w-1/4">
+                <section className="hidden md:flex md:flex-col w-1/4">
                   <div className="flex items-center">
                     <Image
                       src="/images/search/arrow.svg"
@@ -80,7 +81,7 @@ const Search = () => {
                       height={24}
                     />
                     <span className=" text-lg text-gray-main ml-4 font-main">
-                      감정 날씨
+                      진료과
                     </span>
                   </div>
                 </section>
@@ -97,15 +98,15 @@ const Search = () => {
                   />
                   <div className="flex flex-col items-center mt-4">
                     <div className="font-main font-bold lg:text-2xl md:text-xl text-lg ">
-                      <span className="text-black-main">당신의 현재</span>
-                      <span className="text-blue-main"> 감정</span>
-                      <span className="text-black-main">은</span>
+                      <span className="text-black-main">읽고 싶은</span>
+                      <span className="text-blue-main"> 주제</span>
+                      <span className="text-black-main">를 검색해보세요.</span>
                     </div>
                     <div className="font-main font-normal lg:text-2xl md:text-xl text-lg  text-gray-main whitespace-nowrap">
-                      맑음, 구름, 비 중 어느것인가요?
+                      관심있는 진료과에 관련된
                     </div>
                     <div className="font-main font-normal lg:text-2xl md:text-xl text-lg mb-10 text-gray-sub">
-                      원하는 감정의 글을 찾아보세요.
+                      글을 둘러보실 수도 있습니다.
                     </div>
                   </div>
                   <Image
