@@ -255,9 +255,11 @@ const Reply = ({
         </>
       )}
       {/* BackToTop Section */}
-      <section className="flex justify-end mt-28">
-        <BackToTop />
-      </section>
+      {replies.length > 3 ? (
+        <section className="flex justify-end mt-20">
+          <BackToTop />
+        </section>
+      ) : null}
     </main>
   );
 };
