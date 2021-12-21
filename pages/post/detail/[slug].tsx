@@ -325,11 +325,11 @@ const Detail = ({ postData }: IProps) => {
         <main className="lg:w-lg w-screen p-4 mt-4">
           {/* Quil Editor */}
           <article
-            className="prose prose-blue max-w-none font-main text-gray-main"
+            className=" prose prose-blue max-w-none font-main text-gray-main"
             dangerouslySetInnerHTML={{ __html: postData.body }}
           ></article>
           {/* Reply Container */}
-          <section>
+          <section className="mt-20">
             {postData.allow_reply && postData.posts_replies !== undefined ? (
               <>
                 <div className="font-main font-bold text-black-main text-xl mt-12">
