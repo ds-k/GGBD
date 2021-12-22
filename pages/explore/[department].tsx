@@ -151,8 +151,10 @@ const Explore = ({ postData }: IProps) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context: any) => {
-  const { department, weather, id, by } = context.query;
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+}: any) => {
+  const { department, weather, id, by } = query;
 
   const postRes = await axios.get(
     `${process.env.NEXT_PUBLIC_API_URL}/post/${encodeURI(

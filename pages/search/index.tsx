@@ -1,29 +1,41 @@
-import { useState, useEffect, SetStateAction } from "react";
+import React, { useState, useEffect } from "react";
 import HeadInfo from "../../components/global/HeadInfo";
 import Image from "next/image";
 import axios from "axios";
-// import Link from "next/link";
+import Link from "next/link";
+import departmentData from "../../data/departmentData.json";
+
+interface SearchResult {
+  id: number;
+  title: string;
+  weather: string;
+  slug: string;
+  department: {
+    name: string;
+  };
+}
 
 const Search = () => {
   const [isListOpen, setIsListOpen] = useState(false);
   const [queryValue, setQueryValue] = useState("");
-  const [searchResult, setSearchResult] = useState([{ id: 0, title: "" }]);
+  const [searchResult, setSearchResult] = useState<SearchResult[]>([]);
 
-  console.log(searchResult);
-  const getSearchResult = async (q: SetStateAction<string>) => {
+  const getSearchResult = async (query: string) => {
     const searchRes = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/post/search/${q}?offset=0&limit=6`
+      `${process.env.NEXT_PUBLIC_API_URL}/post/search/${query}?offset=0&limit=20`
     );
     setSearchResult(searchRes.data);
   };
 
-  const handleQuery = (e: { target: { value: SetStateAction<string> } }) => {
-    if (e.target.value !== "") {
+  const handleQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const regEx = /^[가-힣a-zA-Z0-9]+$/;
+    console.log(regEx.test(e.target.value));
+    if (regEx.test(e.target.value)) {
       getSearchResult(e.target.value);
     }
     setQueryValue(e.target.value);
   };
-  console.log(queryValue);
+
   useEffect(() => {
     if (queryValue === "") {
       setIsListOpen(false);
@@ -36,25 +48,29 @@ const Search = () => {
     <>
       <HeadInfo title={"검색하기"} content={"글을 검색할 수 있습니다."} />
       <div className="flex justify-center md:p-8 p-4">
-        <main className="flex justify-center w-sm md:w-md lg:w-lg h-screen ">
+        <main className="flex justify-center w-full lg:w-lg h-screen ">
           <section className="flex flex-col mt-28 w-full h-44">
-            <section className="flex items-center justify-between border-b border-gray-sub pl-2">
+            <section className="flex items-center justify-between border-b border-gray-sub ">
               <input
                 type="text"
                 className="w-11/12 h-10 font-main text-2xl text-gray-main outline-none"
                 placeholder="검색어를 입력해주세요."
                 onChange={handleQuery}
               />
-              <Image
-                src="/images/global/search.svg"
-                alt="search"
-                width={24}
-                height={24}
-              />
+              <Link href={`search/${queryValue}`}>
+                <a>
+                  <Image
+                    src="/images/global/search.svg"
+                    alt="search"
+                    width={24}
+                    height={24}
+                  />
+                </a>
+              </Link>
             </section>
             {isListOpen ? (
               <section className="flex mt-4 ">
-                <section className="w-3/4 flex flex-col">
+                <section className="w-full md:w-3/4 flex flex-col pr-4">
                   <div className="flex items-center">
                     <Image
                       src="/images/search/arrow.svg"
@@ -66,9 +82,31 @@ const Search = () => {
                       글 검색
                     </span>
                   </div>
-                  <article className="flex flex-col">
+                  <article className="flex flex-col gap-y-4 h-96 overflow-auto mt-4">
                     {searchResult.map((post) => {
-                      return <li key={post.id}>{post.title}</li>;
+                      return (
+                        <Link key={post.id} href={`/post/detail/${post.slug}`}>
+                          <a>
+                            <li className="list-none flex items-center ">
+                              <span
+                                dangerouslySetInnerHTML={{
+                                  __html: post.title.replace(
+                                    queryValue,
+                                    `<b>${queryValue}</b>`
+                                  ),
+                                }}
+                                className="prose ml-2 font-main text-xl text-gray-main hover:text-blue-main cursor-pointer truncate"
+                              ></span>{" "}
+                              <span className="min-w-max ml-2 font-main text-gray-sub text-sm">
+                                {post.department.name}
+                              </span>
+                              <span className=" min-w-max ml-2 font-main text-gray-sub text-sm">
+                                | {post.weather}
+                              </span>
+                            </li>
+                          </a>
+                        </Link>
+                      );
                     })}
                   </article>
                 </section>
@@ -84,6 +122,24 @@ const Search = () => {
                       진료과
                     </span>
                   </div>
+                  <aside className="flex flex-col gap-y-2 mt-4 h-96 overflow-auto">
+                    {departmentData.map((department) => {
+                      return (
+                        <Link
+                          key={department.id}
+                          href={`/explore/${department.name}?id=${department.id}&weather=전체&by=createdAt`}
+                        >
+                          <a>
+                            <li className="list-none flex items-center ">
+                              <span className="ml-2 font-main text-lg text-gray-main hover:text-blue-main cursor-pointer truncate">
+                                {department.name}
+                              </span>
+                            </li>
+                          </a>
+                        </Link>
+                      );
+                    })}
+                  </aside>
                 </section>
               </section>
             ) : null}
