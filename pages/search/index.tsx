@@ -83,31 +83,42 @@ const Search = () => {
                     </span>
                   </div>
                   <article className="flex flex-col gap-y-4 h-96 overflow-auto mt-4">
-                    {searchResult.map((post) => {
-                      return (
-                        <Link key={post.id} href={`/post/detail/${post.slug}`}>
-                          <a>
-                            <li className="list-none flex items-center ">
-                              <span
-                                dangerouslySetInnerHTML={{
-                                  __html: post.title.replace(
-                                    queryValue,
-                                    `<b>${queryValue}</b>`
-                                  ),
-                                }}
-                                className="prose ml-2 font-main text-xl text-gray-main hover:text-blue-main cursor-pointer truncate"
-                              ></span>{" "}
-                              <span className="min-w-max ml-2 font-main text-gray-sub text-sm">
-                                {post.department.name}
-                              </span>
-                              <span className=" min-w-max ml-2 font-main text-gray-sub text-sm">
-                                | {post.weather}
-                              </span>
-                            </li>
-                          </a>
-                        </Link>
-                      );
-                    })}
+                    {searchResult.length === 0 ? (
+                      <div>
+                        <span className="min-w-max ml-2 font-main text-gray-sub text-lg">
+                          데이터가 없습니다. 다른 키워드로 검색해보세요.
+                        </span>
+                      </div>
+                    ) : (
+                      searchResult.map((post) => {
+                        return (
+                          <Link
+                            key={post.id}
+                            href={`/post/detail/${post.slug}`}
+                          >
+                            <a>
+                              <li className="list-none flex items-center ">
+                                <span
+                                  dangerouslySetInnerHTML={{
+                                    __html: post.title.replace(
+                                      queryValue,
+                                      `<b>${queryValue}</b>`
+                                    ),
+                                  }}
+                                  className="prose ml-2 font-main text-xl text-gray-main hover:text-blue-main cursor-pointer truncate"
+                                ></span>{" "}
+                                <span className="min-w-max ml-2 font-main text-gray-sub text-sm">
+                                  {post.department.name}
+                                </span>
+                                <span className=" min-w-max ml-2 font-main text-gray-sub text-sm">
+                                  | {post.weather}
+                                </span>
+                              </li>
+                            </a>
+                          </Link>
+                        );
+                      })
+                    )}
                   </article>
                 </section>
                 <section className="hidden md:flex md:flex-col w-1/4">

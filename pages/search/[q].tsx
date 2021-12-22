@@ -18,7 +18,6 @@ const SearchByQuery = ({ postData }: IProps) => {
   const router = useRouter();
   const { q } = router.query;
   const [queryValue, setQueryValue] = useState(q);
-  console.log(`queryValue`, queryValue);
 
   return (
     <>
@@ -68,7 +67,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   query,
 }: any) => {
   const { q } = query;
-  console.log(q);
+
   const searchRes = await axios.get(
     `${process.env.NEXT_PUBLIC_API_URL}/post/search/${encodeURI(
       q
