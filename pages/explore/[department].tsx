@@ -12,6 +12,7 @@ import ArrowLeft from "../../components/icon/ArrowLeft";
 import ArrowRight from "../../components/icon/ArrowRight";
 import { GetServerSideProps } from "next";
 import { PostType } from "../../types/post";
+import { NoData } from "../../components/common/NoData";
 
 interface IProps {
   postData: PostType[];
@@ -139,7 +140,12 @@ const Explore = ({ postData }: IProps) => {
               </section>
               {/* post list section */}
               {postData.length === 0 ? (
-                <div>데이터가 없넹</div>
+                <div>
+                  <NoData
+                    comment="찾으시는 게시글이 없습니다."
+                    description="다른 환우들을 위해 글을 남겨보세요."
+                  />
+                </div>
               ) : (
                 <PostList postData={postData} />
               )}
