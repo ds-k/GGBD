@@ -24,7 +24,14 @@ const SearchByQuery = ({ postData }: IProps) => {
       <HeadInfo title={"검색하기"} content={"글을 검색할 수 있습니다."} />
       <div className="flex justify-center md:p-8 p-4">
         <main className="flex flex-col justify-center w-full lg:w-lg ">
-          <section className="flex items-center mt-14 justify-between border-b border-gray-sub ">
+          <section
+            className={
+              "flex items-center justify-between border-b " +
+              (queryValue === q || queryValue === ""
+                ? "border-gray-sub"
+                : "border-blue-main")
+            }
+          >
             <input
               type="text"
               className="w-11/12 h-10 font-main text-2xl text-gray-main outline-none"

@@ -50,7 +50,12 @@ const Search = () => {
       <div className="flex justify-center md:p-8 p-4">
         <main className="flex justify-center w-full lg:w-lg h-screen ">
           <section className="flex flex-col mt-28 w-full h-44">
-            <section className="flex items-center justify-between border-b border-gray-sub ">
+            <section
+              className={
+                "flex items-center justify-between border-b " +
+                (queryValue === "" ? "border-gray-sub" : "border-blue-main")
+              }
+            >
               <input
                 type="text"
                 className="w-11/12 h-10 font-main text-2xl text-gray-main outline-none"
