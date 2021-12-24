@@ -23,7 +23,7 @@ const DepartmentBoard = ({ department, replies }: IProps) => {
         content={`${name}에 대해 알고계신 정보를 공유해 주세요.`}
       />
       {/* DepartmentBoard Page */}
-      <body className="flex justify-center md:p-8 p-4">
+      <div className="flex justify-center md:p-8 p-4">
         <main className="lg:w-lg w-screen">
           {/* Title Container */}
           <section className="mt-2 mb-12">
@@ -61,7 +61,7 @@ const DepartmentBoard = ({ department, replies }: IProps) => {
             />
           </section>
         </main>
-      </body>
+      </div>
     </>
   );
 };
