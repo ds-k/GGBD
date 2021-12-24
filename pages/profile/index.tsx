@@ -4,11 +4,38 @@ import Link from "next/link";
 import HeadInfo from "../../components/global/HeadInfo";
 import MainBtn from "../../components/common/MainBtn";
 import SubBtn from "../../components/common/SubBtn";
-import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { userState } from "../../state/atom";
+import { useState } from "react";
+
+// import axios from "axios";
 
 const Profile = () => {
-  const { id, nickname, description, img } = useRecoilValue(userState);
+  const [user, setUser] = useRecoilState(userState);
+  const { id, nickname, description, img } = user;
+  const [isNameLabelOpen, setIsNameLabelOpen] = useState(false);
+  const [isDescLabelOpen, setIsDescLabelOpen] = useState(false);
+  console.log(setUser);
+  // const handleEdit = async () => {
+  //   const result = await axios.patch(
+  //     `${process.env.NEXT_PUBLIC_API_URL}/${target.name}/reply/?id=${id}`,
+  //     {
+  //       reply: edit.reply,
+  //     },
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${user.accessToken}`,
+  //         "Content-Type": "application/json",
+  //       },
+  //       withCredentials: true,
+  //     }
+  //   );
+
+  //   if (result) {
+  //     setEdit({ isEdit: false, reply: "" });
+  //     router.replace(router.asPath);
+  //   }
+  // };
 
   return (
     <>
@@ -29,18 +56,50 @@ const Profile = () => {
             </div>
             <div className="flex flex-col justify-center lg:ml-7 w-5/6">
               <section className="py-2 border-b border-gray-sub flex justify-between">
-                <span className="text-black-main font-main font-bold text-xl md:text-2xl lg:text-3xl ">
-                  {nickname}
-                </span>
-                <span className="font-main text-gray-main text-lg cursor-pointer">
+                {!isNameLabelOpen ? (
+                  <span className="text-black-main font-main font-bold text-xl md:text-2xl lg:text-3xl ">
+                    {nickname}
+                  </span>
+                ) : (
+                  <div className="flex ">
+                    <input
+                      className="outline-none text-black-main font-main font-bold text-xl md:text-2xl lg:text-3xl"
+                      type="text"
+                      placeholder={nickname}
+                      onChange={(e) => console.log(e.target.value)}
+                      autoFocus
+                    />
+                    <MainBtn context="수정" handleClick={() => {}}></MainBtn>
+                  </div>
+                )}
+                <span
+                  className="font-main text-gray-main text-lg cursor-pointer"
+                  onClick={() => setIsNameLabelOpen(!isNameLabelOpen)}
+                >
                   수정
                 </span>
               </section>
               <section className="py-2 flex justify-between">
-                <span className="text-gray-main font-main text-base md:text-lg lg:text-xl">
-                  {description}
-                </span>
-                <span className="font-main text-gray-main text-lg cursor-pointer">
+                {!isDescLabelOpen ? (
+                  <span className="text-gray-main font-main text-base md:text-lg lg:text-xl">
+                    {description}
+                  </span>
+                ) : (
+                  <div className="flex ">
+                    <input
+                      className="outline-none text-gray-main font-main text-base md:text-lg lg:text-xl"
+                      type="text"
+                      placeholder={description}
+                      onChange={(e) => console.log(e.target.value)}
+                      autoFocus
+                    />
+                    <MainBtn context="수정" handleClick={() => {}}></MainBtn>
+                  </div>
+                )}
+                <span
+                  className="font-main text-gray-main text-lg cursor-pointer"
+                  onClick={() => setIsDescLabelOpen(!isDescLabelOpen)}
+                >
                   수정
                 </span>
               </section>
