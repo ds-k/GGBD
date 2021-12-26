@@ -121,7 +121,7 @@ const Reply = ({
       {/* Input Section */}
       {user.isLogin ? (
         <section
-          className="flex items-end mt-12 mb-14"
+          className="flex items-end mb-12"
           onClick={() => setEdit({ isEdit: false, reply: "" })}
         >
           <div className="w-full mr-4 ">
@@ -147,13 +147,16 @@ const Reply = ({
         <NoData comment={comment} description={description} />
       ) : (
         <>
-          {replies.map((el) => {
+          {replies.map((reply) => {
             return (
-              <li key={el.id} className="list-none flex justify-between mb-12">
+              <li
+                key={reply.id}
+                className="list-none flex justify-between mb-12"
+              >
                 {/* Img Section */}
                 <section className="w-16 h-16 mt-1">
                   <Image
-                    src={el.user.img}
+                    src={reply.user.img}
                     alt="profile"
                     width={58}
                     height={58}
@@ -163,13 +166,13 @@ const Reply = ({
                 {/* Content Section */}
                 <section className=" ml-4 w-full">
                   <span className="font-main font-bold text-lg text-blue-main">
-                    {el.user.nickname}
+                    {reply.user.nickname}
                   </span>
                   <span className="ml-2 font-main font-normal text-base text-gray-sub">
-                    {moment(el.createdAt).format("LL")}
+                    {moment(reply.createdAt).format("LL")}
                   </span>
                   <div className=" font-main font-normal md:text-xl text-base text-black-main mt-1">
-                    {edit.isEdit && el.id === id ? (
+                    {edit.isEdit && reply.id === id ? (
                       <>
                         <input
                           className="w-full outline-none border-1/2 border-b border-blue-main pb-1"
@@ -198,15 +201,15 @@ const Reply = ({
                         </div>
                       </>
                     ) : (
-                      <span>{el.reply}</span>
+                      <span>{reply.reply}</span>
                     )}
                   </div>
                 </section>
                 {/* Edit Section */}
                 <section className="w-8 mt-2">
-                  {user.id === el.user.id ? (
+                  {user.id === reply.user.id ? (
                     <div>
-                      {isOpen && el.id === id ? (
+                      {isOpen && reply.id === id ? (
                         <div
                           className="fixed inset-0 z-20 w-screen h-screen cursor-pointer"
                           onClick={() => setIsOpen(false)}
@@ -215,7 +218,7 @@ const Reply = ({
                       <section
                         onClick={() => {
                           setIsOpen(!isOpen);
-                          setId(el.id);
+                          setId(reply.id);
                         }}
                         className="flex flex-col items-end"
                       >
@@ -227,12 +230,12 @@ const Reply = ({
                         >
                           <MoreIcon color={isClick ? "#0984C0" : "#AAA7B0"} />
                         </div>
-                        {isOpen && el.id === id ? (
+                        {isOpen && reply.id === id ? (
                           <section className="absolute z-30 flex mt-7 flex-col font-sub text-base w-24 mr-1 text-gray-sub bg-white border border-gray-sub">
                             <span
                               className="flex justify-center items-center cursor-pointer h-9 hover:text-blue-main active:text-blue-sub border-b border-gray-sub"
                               onClick={() =>
-                                setEdit({ isEdit: true, reply: el.reply })
+                                setEdit({ isEdit: true, reply: reply.reply })
                               }
                             >
                               수정
