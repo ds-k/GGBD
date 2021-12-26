@@ -29,6 +29,7 @@
 - Stack : `React`, `React-Hooks`, `Next.js`, `TypeScript`, `Tailwindcss`, `Recoil`, `JavaScript`, `node.js`, `Sequelize`, `mysql`
 - Works : Home, Footer, Header, Drawer, Login, Logout, Profile, DetailPost, Search, Explore
 
+
 <img src = "https://user-images.githubusercontent.com/85698976/143169476-4b176358-7440-4327-b52b-6b3009c05fd6.jpg" width="200px">
 <a href="https://github.com/devSominPark"><img src = "https://img.shields.io/badge/devSominPark-black?style=for-the-badge&logo=GitHub&logoColor=white"></a>
 
@@ -38,6 +39,7 @@
 - Position : Full-Stack
 - Stack : `React`, `React-Hooks`, `Next.js`, `TypeScript`, `Tailwindcss`, `Recoil`, `JavaScript`, `node.js`, `Sequelize`, `mysql`
 - Works :  Home, CreatePost, DetailPost, EditPost, Hospital, Department, Record
+
 
 ## More Info
 
