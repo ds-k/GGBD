@@ -44,7 +44,7 @@ const Hospital = ({ hospitals }: IProps) => {
         }
       />
       {/* Hospital Page */}
-      <body className="flex justify-center md:p-8 p-4">
+      <div className="flex justify-center md:p-8 p-4">
         <main className="lg:w-lg w-screen">
           {/* Title Section */}
           <Title
@@ -75,7 +75,7 @@ const Hospital = ({ hospitals }: IProps) => {
             </section>
           ) : null}
         </main>
-      </body>
+      </div>
     </>
   );
 };

@@ -2,18 +2,17 @@ import HeadInfo from "../../../components/global/HeadInfo";
 import { GetServerSideProps } from "next";
 import axios from "axios";
 import Image from "next/image";
-import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 import { userState } from "../../../state/atom";
-import MoreIcon from "../../../components/icon/MoreIcon";
-import Toggle from "../../../components/common/Toggle";
 import moment from "moment";
 import "moment/locale/ko";
 import { PostType } from "../../../types/post";
 import Reply from "../../../components/reply/Reply";
 import CommonModal from "../../../components/modal/CommonModal";
+import EditSection from "../../../components/detail/EditSection";
+import ToggleSection from "../../../components/detail/ToggleSection";
 
 interface IProps {
   postData: PostType;
@@ -22,146 +21,8 @@ interface IProps {
 const Detail = ({ postData }: IProps) => {
   const router = useRouter();
 
-  const [user, setUser] = useRecoilState(userState);
-
-  const [isClick, setIsClick] = useState<boolean>(false);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [user] = useRecoilState(userState);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-  const [likes, setLikes] = useState({
-    isLike: false,
-    likesCount: postData.likes,
-  });
-
-  const [scraps, setScraps] = useState({
-    isScrap: false,
-    scrapsCount: postData.scraps,
-  });
-
-  useEffect(() => {
-    if (user.isLogin) {
-      if (user.likes) {
-        const findLikes = user.likes.filter(
-          (like: { posts_id: number }) => like.posts_id === postData.id
-        );
-        if (findLikes.length === 1) {
-          setLikes({
-            isLike: true,
-            likesCount: likes.likesCount,
-          });
-        }
-      }
-
-      if (user.scraps) {
-        const findScraps = user.scraps.filter(
-          (scrap: { posts_id: number }) => scrap.posts_id === postData.id
-        );
-        if (findScraps.length === 1) {
-          setScraps({
-            isScrap: true,
-            scrapsCount: scraps.scrapsCount,
-          });
-        }
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const submitPost = async (context: string) => {
-    const result = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/post/${context}`,
-      {
-        users_id: user.id,
-        posts_id: postData.id,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${user.accessToken}`,
-          "Content-Type": "application/json",
-        },
-        withCredentials: true,
-      }
-    );
-
-    if (result.status === 201) {
-      if (context === "postLike") {
-        setUser({
-          ...user,
-          likes: [...user.likes, { posts_id: postData.id }],
-        });
-      } else {
-        setUser({
-          ...user,
-          scraps: [...user.scraps, { posts_id: postData.id }],
-        });
-      }
-      router.replace(router.asPath);
-    }
-  };
-
-  const submitDelete = async (context: string) => {
-    const result = await axios.delete(
-      `${process.env.NEXT_PUBLIC_API_URL}/post/${context}?users_id=${user.id}&posts_id=${postData.id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${user.accessToken}`,
-          "Content-Type": "application/json",
-        },
-        withCredentials: true,
-      }
-    );
-
-    if (result.status === 200) {
-      if (context === "deleteLike") {
-        setUser({
-          ...user,
-          likes: user.likes.filter(
-            (like: { posts_id: number }) => like.posts_id !== postData.id
-          ),
-        });
-      } else {
-        setUser({
-          ...user,
-          scraps: user.scraps.filter(
-            (scrap: { posts_id: number }) => scrap.posts_id !== postData.id
-          ),
-        });
-      }
-      router.replace(router.asPath);
-    }
-  };
-
-  const handleLikes = async () => {
-    if (likes.isLike) {
-      setLikes({
-        isLike: false,
-        likesCount: likes.likesCount - 1,
-      });
-      submitDelete("deleteLike");
-    } else {
-      setLikes({
-        isLike: true,
-        likesCount: likes.likesCount + 1,
-      });
-      submitPost("postLike");
-    }
-  };
-
-  const handleScraps = () => {
-    if (scraps.isScrap) {
-      setScraps({
-        isScrap: false,
-        scrapsCount: scraps.scrapsCount - 1,
-      });
-      submitDelete("deleteScrap");
-    } else {
-      setScraps({
-        isScrap: true,
-        scrapsCount: scraps.scrapsCount + 1,
-      });
-      submitPost("postScrap");
-    }
-  };
 
   const handleDeletePost = async () => {
     const result = await axios.delete(
@@ -223,36 +84,7 @@ const Detail = ({ postData }: IProps) => {
               />
             </section>
             {/* Toggle Section */}
-            {user.isLogin ? (
-              <section className="flex md:my-4 mt-0 mb-2 items-center justify-end">
-                <div className="flex items-end">
-                  <span className="mr-2 font-main font-nomal lg:text-xl text-lg text-gray-main">
-                    응원하기
-                  </span>
-                  <span className="mr-2 font-main font-nomal lg:text-lg text-base text-gray-sub">
-                    {likes.likesCount}개
-                  </span>
-                </div>
-                <Toggle
-                  isClick={likes.isLike}
-                  handleClick={() => handleLikes()}
-                  color={"bg-toggle-pink"}
-                />
-                <div className="flex items-end">
-                  <span className="lg:ml-6 ml-4 mx-2 font-main font-nomal lg:text-xl text-lg text-gray-main">
-                    스크랩하기
-                  </span>
-                  <span className="mr-2 font-main font-nomal lg:text-lg text-base text-gray-sub">
-                    {scraps.scrapsCount}개
-                  </span>
-                </div>
-                <Toggle
-                  isClick={scraps.isScrap}
-                  handleClick={() => handleScraps()}
-                  color={"bg-toggle-yellow"}
-                />
-              </section>
-            ) : null}
+            {user.isLogin ? <ToggleSection postData={postData} /> : null}
           </div>
           {/* Date Section */}
           <section className="flex justify-start mb-3 mt-6 font-main font-nomal lg:text-lg text-base text-gray-main">
@@ -265,50 +97,10 @@ const Detail = ({ postData }: IProps) => {
                 {postData.title}
               </div>
               {/* Edit Section */}
-              <div className="w-8">
-                {user.id === postData.users_id ? (
-                  <div>
-                    {isOpen ? (
-                      <div
-                        className="fixed inset-0 w-screen h-screen cursor-pointer"
-                        onClick={() => setIsOpen(false)}
-                      />
-                    ) : null}
-                    <div
-                      onClick={() => {
-                        setIsOpen(!isOpen);
-                      }}
-                      className="flex flex-col items-end"
-                    >
-                      <div
-                        onMouseDown={() => {
-                          setIsClick(true);
-                        }}
-                        onMouseUp={() => setIsClick(false)}
-                      >
-                        <MoreIcon color={isClick ? "#0984C0" : "#AAA7B0"} />
-                      </div>
-                      {isOpen ? (
-                        <div className="absolute flex mt-7 flex-col font-sub text-base w-24 mr-1 text-gray-sub bg-white border border-gray-sub">
-                          <Link href={`/post/edit/${postData.slug}`}>
-                            <a>
-                              <span className="flex justify-center items-center cursor-pointer h-9 hover:text-blue-main active:text-blue-sub border-b border-gray-sub">
-                                수정
-                              </span>
-                            </a>
-                          </Link>
-                          <span
-                            className="flex justify-center items-center cursor-pointer h-9 hover:text-blue-main active:text-blue-sub"
-                            onClick={() => setIsModalOpen(true)}
-                          >
-                            삭제
-                          </span>
-                        </div>
-                      ) : null}
-                    </div>
-                  </div>
-                ) : null}
-              </div>
+              <EditSection
+                postData={postData}
+                setIsModalOpen={setIsModalOpen}
+              />
             </div>
             <div className="w-full mb-4 font-main font-normal md:text-xl text-lg  text-black-main ">
               {postData.description}
@@ -325,7 +117,7 @@ const Detail = ({ postData }: IProps) => {
         <main className="lg:w-lg w-screen p-4 mt-4">
           {/* Quil Editor */}
           <article
-            className=" prose prose-blue max-w-none font-main text-gray-main"
+            className="md:text-lg text-base prose prose-blue max-w-none font-main text-gray-main"
             dangerouslySetInnerHTML={{ __html: postData.body }}
           ></article>
           {/* Reply Container */}
