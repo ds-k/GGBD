@@ -46,6 +46,29 @@ const Nav = () => {
           </a>
         </Link>
       </div>
+      <div className="md:flex hidden items-center font-sub font-normal text-sm text-gray-sub">
+        <Link href="/explore/모든-글?id=0&weather=전체&by=createdAt">
+          <a>
+            <span className="cursor-pointer hover:text-blue-main active:text-blue-sub">
+              글 둘러보기
+            </span>
+          </a>
+        </Link>
+        <Link href="/department">
+          <a>
+            <span className="cursor-pointer hover:text-blue-main active:text-blue-sub mx-8">
+              진료과별 이야기
+            </span>
+          </a>
+        </Link>
+        <Link href="/hospital/전체">
+          <a>
+            <span className="cursor-pointer hover:text-blue-main active:text-blue-sub">
+              상급종합병원
+            </span>
+          </a>
+        </Link>
+      </div>
       <div className="flex items-center">
         <Link href="/search">
           <a className="flex items-center mr-3 ">
