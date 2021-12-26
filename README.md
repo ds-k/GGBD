@@ -15,6 +15,7 @@
 6. 응원이 필요한 글을 기준으로 정렬할 수 있습니다.
 
 ## 사용 스택
+<img src = "https://user-images.githubusercontent.com/85698976/147404653-473e63d3-8804-4704-89f6-940d40c3a469.png" width="700px">
 
 ## Team Members
 
@@ -25,8 +26,8 @@
 
 - Role : Team Leader
 - Position : Full-Stack
-- Stack :
-- Works :
+- Stack : `React`, `React-Hooks`, `Next.js`, `TypeScript`, `Tailwindcss`, `Recoil`, `JavaScript`, `node.js`, `Sequelize`, `mysql`
+- Works : Home, Footer, Header, Drawer, Login, Logout, Profile, DetailPost, Search, Explore
 
 <img src = "https://user-images.githubusercontent.com/85698976/143169476-4b176358-7440-4327-b52b-6b3009c05fd6.jpg" width="200px">
 <a href="https://github.com/devSominPark"><img src = "https://img.shields.io/badge/devSominPark-black?style=for-the-badge&logo=GitHub&logoColor=white"></a>
@@ -34,9 +35,9 @@
 ### 박소민
 
 - Role : Team Member
-- Position : Front-End
-- Stack :
-- Works :
+- Position : Full-Stack
+- Stack : `React`, `React-Hooks`, `Next.js`, `TypeScript`, `Tailwindcss`, `Recoil`, `JavaScript`, `node.js`, `Sequelize`, `mysql`
+- Works :  Home, CreatePost, DetailPost, EditPost, Hospital, Department, Record
 
 ## More Info
 
@@ -46,10 +47,8 @@
 
 - [DB schema](https://github.com/daeseongkim05/GGBD/wiki/DB-Schema)
 
-- [API 문서]()
-
 - [Flowchart](https://github.com/daeseongkim05/GGBD/wiki/Flow-Chart)
 
 - [Wireframe](https://github.com/daeseongkim05/GGBD/wiki/Wireframe)
 
-- [UI-Design]()
+- [UI-Design](https://github.com/daeseongkim05/GGBD/wiki/UI-Design)
