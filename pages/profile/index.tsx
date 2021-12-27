@@ -81,13 +81,23 @@ const Profile = () => {
           <section className="flex items-center flex-col lg:flex-row mt-28 w-screen  h-44">
             <div className="w-1/6">
               <section>
-                <Image
-                  src={img}
-                  alt={nickname}
-                  width={170}
-                  height={170}
-                  className=" rounded-full"
-                />
+                {img === "guest" ? (
+                  <Image
+                    src="/images/global/guest_profile.svg"
+                    alt="guest_profile"
+                    width={170}
+                    height={170}
+                    className=" rounded-full"
+                  />
+                ) : (
+                  <Image
+                    src={img}
+                    alt={nickname}
+                    width={170}
+                    height={170}
+                    className=" rounded-full"
+                  />
+                )}
               </section>
             </div>
             <div className="flex flex-col justify-center lg:ml-7 w-5/6">
