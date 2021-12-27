@@ -155,13 +155,23 @@ const Reply = ({
               >
                 {/* Img Section */}
                 <section className="w-16 h-16 mt-1">
-                  <Image
-                    src={reply.user.img}
-                    alt="profile"
-                    width={58}
-                    height={58}
-                    className="rounded-full"
-                  />
+                  {reply.user.img === "guest" ? (
+                    <Image
+                      src="/images/global/guest_profile.svg"
+                      alt="guest_profile"
+                      width={58}
+                      height={58}
+                      className="cursor-pointer"
+                    />
+                  ) : (
+                    <Image
+                      src={reply.user.img}
+                      alt="profile"
+                      width={58}
+                      height={58}
+                      className="rounded-full"
+                    />
+                  )}
                 </section>
                 {/* Content Section */}
                 <section className=" ml-4 w-full">
