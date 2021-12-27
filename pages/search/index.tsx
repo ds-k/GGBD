@@ -29,7 +29,6 @@ const Search = () => {
 
   const handleQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
     const regEx = /^[가-힣a-zA-Z0-9]+$/;
-    console.log(regEx.test(e.target.value));
     if (regEx.test(e.target.value)) {
       getSearchResult(e.target.value);
     }
@@ -90,7 +89,7 @@ const Search = () => {
                   <article className="flex flex-col gap-y-4 h-96 overflow-auto mt-4">
                     {searchResult.length === 0 ? (
                       <div>
-                        <span className="min-w-max ml-2 font-main text-gray-sub text-lg">
+                        <span className="min-w-max ml-2 font-main text-gray-sub md:text-lg text-base">
                           데이터가 없습니다. 다른 키워드로 검색해보세요.
                         </span>
                       </div>
@@ -147,7 +146,7 @@ const Search = () => {
                         >
                           <a>
                             <li className="list-none flex items-center ">
-                              <span className="ml-2 font-main text-lg text-gray-main hover:text-blue-main cursor-pointer truncate">
+                              <span className="ml-2 font-main text-lg text-gray-sub hover:text-blue-main cursor-pointer truncate">
                                 {department.name}
                               </span>
                             </li>
