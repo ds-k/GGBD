@@ -56,8 +56,8 @@ const Hospital = ({ hospitals }: IProps) => {
           {/* Img Section */}
           <section className="lg:my-4 md:my-3 my-2 w-full">
             <Image
-              src="/images/hospital/gate_Picture.svg"
-              alt="gate_Picture"
+              src="/images/hospital/gate_picture.svg"
+              alt="gate_picture"
               width={1031}
               height={277}
             />
