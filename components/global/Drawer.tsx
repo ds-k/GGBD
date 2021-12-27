@@ -52,13 +52,23 @@ const Drawer = () => {
               {user.isLogin ? (
                 <Link href="/profile">
                   <a onClick={() => setIsDrawerOpen(!isDrawerOpen)}>
-                    <Image
-                      src={user.img}
-                      alt={user.nickname}
-                      width={55}
-                      height={55}
-                      className="cursor-pointer rounded-full"
-                    />
+                    {user.img === "guest" ? (
+                      <Image
+                        src="/images/global/guest_profile.svg"
+                        alt="guest_profile"
+                        width={55}
+                        height={55}
+                        className="cursor-pointer"
+                      />
+                    ) : (
+                      <Image
+                        src={user.img}
+                        alt={user.nickname}
+                        width={55}
+                        height={55}
+                        className="cursor-pointer rounded-full"
+                      />
+                    )}
                   </a>
                 </Link>
               ) : (
