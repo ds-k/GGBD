@@ -1,4 +1,3 @@
-import Link from "next/link";
 import ListTitle from "../common/ListTitle";
 import PhoneIcon from "../icon/PhoneIcon";
 import LocationMarker from "../icon/LocationMaker";
@@ -48,6 +47,8 @@ const HospitalSection = ({ hospitals }: IProps) => {
                   <address className="flex items-center mr-4">
                     <a
                       href={`https://map.naver.com/v5/search/${el.address}`}
+                      target="_blank"
+                      rel="noreferrer"
                       className="flex items-center not-italic"
                     >
                       <LocationMarker color={"#0984C0"} />
@@ -70,13 +71,11 @@ const HospitalSection = ({ hospitals }: IProps) => {
                 </div>
               </div>
               {/* 홈페이지 링크 */}
-              <Link href={`${el.homepage}`}>
-                <a>
-                  <div className="cursor-pointer flex justify-center items-center border border-blue-main active:border-blue-sub rounded-full md:w-12 md:h-12 w-10 h-10">
-                    <HomeIcon color={"#0984C0"} />
-                  </div>
-                </a>
-              </Link>
+              <a href={`${el.homepage}`} target="_blank" rel="noreferrer">
+                <div className="cursor-pointer flex justify-center items-center border border-blue-main active:border-blue-sub rounded-full md:w-12 md:h-12 w-10 h-10">
+                  <HomeIcon color={"#0984C0"} />
+                </div>
+              </a>
             </li>
           );
         })}
