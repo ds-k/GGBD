@@ -143,7 +143,7 @@ const Reply = ({
           <MainBtn context="등록" handleClick={() => handleSubmitReply()} />
         </section>
       ) : null}
-      {replies.length === 0 && comment !== undefined ? (
+      {replies && replies.length === 0 && comment !== undefined ? (
         <NoData comment={comment} description={description} />
       ) : (
         <>
