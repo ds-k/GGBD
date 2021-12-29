@@ -9,5 +9,5 @@ module.exports = {
     ],
   },
   reactStrictMode: true,
-  swcMinify: false,
+  optimizeFonts: false,
 };
