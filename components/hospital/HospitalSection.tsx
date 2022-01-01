@@ -43,7 +43,7 @@ const HospitalSection = ({ hospitals }: IProps) => {
                   <span>{el.name}</span>
                 </div>
                 {/* 병원 상세 정보 */}
-                <div className="flex font-main font-normal md:text-base text-sm">
+                <div className="flex flex-col md:flex-row font-main font-normal md:text-base text-sm">
                   <address className="flex items-center mr-4">
                     <a
                       href={`https://map.naver.com/v5/search/${el.address}`}
@@ -57,10 +57,10 @@ const HospitalSection = ({ hospitals }: IProps) => {
                       </span>
                     </a>
                   </address>
-                  <address className="md:block hidden">
+                  <address className="flex items-center md:mt-0 mt-1">
                     <a
-                      href={`${el.phone}`}
-                      className="flex items-center not-italic"
+                      href={`tel:${el.phone}`}
+                      className="flex items-center not-italic pl-0.5"
                     >
                       <PhoneIcon color={"#0984C0"} />
                       <span className="text-gray-sub hover:text-blue-main active:text-blue-sub ml-1">
