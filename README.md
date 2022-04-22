@@ -20,7 +20,7 @@
 ## Team Members
 
 <img src = "https://user-images.githubusercontent.com/85698976/143169456-993f78b0-cb49-4289-82fc-7f143a434b08.jpeg" width="200px">
-<a href="https://github.com/daeseongkim05"><img src = "https://img.shields.io/badge/daeseongkim05-black?style=for-the-badge&logo=GitHub&logoColor=white"></a>
+<a href="https://github.com/ds-k"><img src = "https://img.shields.io/badge/ds-k-black?style=for-the-badge&logo=GitHub&logoColor=white"></a>
 
 ### 김대성
 
